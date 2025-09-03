@@ -10,7 +10,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
+  font-family: "Inter", sans-serif;
 }
 
 h1 {
@@ -68,8 +70,7 @@ p, ul, li, ol, tr, td, summary, dl, dd {
   @media screen and (max-width: 450px) {
     font-size: 14px;
   }
-  letter-spacing: -0.01rem;
-  line-height: 1.5rem;
+  letter-spacing: -0.01em;
 }
 
 dt {
