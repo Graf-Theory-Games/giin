@@ -5,8 +5,8 @@ import starlightThemeFlexoki from 'starlight-theme-flexoki'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://graf-theory-games.github.io/giin/docs',
-  base: '/giin/docs',
+  site: 'https://graf-theory-games.github.io/giin/',
+  base: '/giin/',
 	integrations: [
 		starlight({
       plugins: [starlightThemeFlexoki()],
