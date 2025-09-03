@@ -70,6 +70,7 @@ p, ul, li, ol, tr, td, summary, dl, dd {
   @media screen and (max-width: 450px) {
     font-size: 14px;
   }
+  letter-spacing: -0.01em;
 }
 
 dt {
@@ -81,4 +82,12 @@ dd > ul {
 }
 dd {
     margin-bottom: 0.3rem;
+}
+
+.sl-anchor-icon {
+  width: 75%;
+}
+
+.sl-markdown-content .sl-anchor-icon > svg {
+  vertical-align: super;
 }
