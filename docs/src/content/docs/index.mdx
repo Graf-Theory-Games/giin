@@ -3,17 +3,51 @@ title: GIIN user manual
 description: Guides and references for creating web-based games using GIIN.
 ---
 
-**Generic Incremental Interactive eNgine (GIIN)** is a game engine for menu-driven games on the web. It is currently in early development. 
+**Generic Incremental Interactive eNgine (GIIN)** is a game engine for menu-driven games on the web. It is currently in early development.
 
-## Feature demo
+GIIN makes use of MS Excel to create data (content) in games. It uses a simple scripting language to create instances of objects, which are then manipulated by the player through the game's logic.
 
-### Visual novel engine features
+Watch a demo to see it in action.
+
+## Feature demos
+
+#### September 5, 2025
+
+_**Read the devlog**: Milestone 01_
 
 <video width="480" height="360" controls><source src="/docs/src/assets/giin-log3.mp4" type="video/mp4" /></video>
 
-- Branching dialog
-- Stat creation and management
+- Basic export pipeline to enforce separation of data and logic.
+- Visual novel features:
+  - Branching dialog.
+  - Stat creation and management.
 
-## Goals
+## Goal
+
+- To make incremental, visual novel, and adventure game mechanics easily scriptable and prototypable.
+
+## Prerequisites
+
+- MS Excel with `xlwings` installed
+- NodeJS
 
 ## Roadmap
+
+### General
+
+- A library of common UI and UX components for various game states.
+- Stat creation and management. 
+  - This means users are able to create stats, such as Energy, Hit Points (HP), Stamina, or any other stat.
+- Data export through MS Excel.
+
+### Visual novel
+
+- 
+
+### Incremental game
+
+### Adventure game
+
+## Inspiration
+
+- The [SCUMM game engine](https://www.gamedeveloper.com/design/the-scumm-diary-stories-behind-one-of-the-greatest-game-engines-ever-made). See the **Learning SCUMM** and **The SCUMM advantage** sections of the linked article.
