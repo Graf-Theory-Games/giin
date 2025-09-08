@@ -19,7 +19,7 @@ export default defineConfig({
             name: "urbanpidgeon",
             //picture: "",
             url: "https://github.com/urbanpidgeon",
-            //title: "",
+            title: "Maintainer",
           }
         },
       }),

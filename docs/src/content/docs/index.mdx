@@ -2,10 +2,13 @@
 title: GIIN user manual
 description: Guides and references for creating web-based games using GIIN.
 ---
+import { Image } from 'astro:assets';
+//import myImportedImage from '../../assets/houston.webp';
+import demoLog1 from '../../assets/giin-log3.mp4';
 
 **Generic Incremental Interactive eNgine (GIIN)** is a game engine for menu-driven games on the web. It is currently in early development.
 
-GIIN makes use of MS Excel to create data (content) in games. It uses a simple scripting language to create instances of objects, which are then manipulated by the player through the game's logic.
+GIIN makes use of MS Excel to create data or content in games. It uses a simple scripting language to create **game objects** and **interactions**.
 
 Watch a demo to see it in action.
 
@@ -15,7 +18,7 @@ Watch a demo to see it in action.
 
 _**Read the devlog**: Milestone 01_
 
-<video width="480" height="360" controls><source src="/docs/src/assets/giin-log3.mp4" type="video/mp4" /></video>
+<video width="480" height="360" controls><source src={demoLog1} type="video/mp4" /></video>
 
 - Basic export pipeline to enforce separation of data and logic.
 - Visual novel features:
@@ -24,7 +27,7 @@ _**Read the devlog**: Milestone 01_
 
 ## Goal
 
-- To make incremental, visual novel, and adventure game mechanics easily scriptable and prototypable.
+To make incremental, visual novel, and adventure game mechanics easily scriptable and prototypable.
 
 ## Prerequisites
 
@@ -33,21 +36,13 @@ _**Read the devlog**: Milestone 01_
 
 ## Roadmap
 
-### General
-
-- A library of common UI and UX components for various game states.
+- A library of common UI and UX components for various game interactions and states.
 - Stat creation and management. 
   - This means users are able to create stats, such as Energy, Hit Points (HP), Stamina, or any other stat.
 - Data export through MS Excel.
-
-### Visual novel
-
-- 
-
-### Incremental game
-
-### Adventure game
+- Image and 2D particle support.
 
 ## Inspiration
 
 - The [SCUMM game engine](https://www.gamedeveloper.com/design/the-scumm-diary-stories-behind-one-of-the-greatest-game-engines-ever-made). See the **Learning SCUMM** and **The SCUMM advantage** sections of the linked article.
+- The Sleipnir game engine, which was used for a variety of [Adventure games](https://hogs.fandom.com/wiki/Boomzap_Entertainment). It supported Hidden Object and various Puzzle mechanics.
