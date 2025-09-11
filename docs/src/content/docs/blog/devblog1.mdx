@@ -5,6 +5,8 @@ featured: true
 ---
 import demoLog1 from '/src/assets/giin-log3.mp4';
 
+![DESCRIPTION-tk](/src/assets/giin-logo-temp.png)
+
 Generic Incremental Interactive eNgine (GIIN) is a small engine for building menu-based games. It currently supports basic visual novel mechanics similar to [Twine](www.twinery.org), and is in development towards eventually supporting incremental and adventure game mechanics. It is built on ReactJS and is in early development.
 
 ## Beginnings
@@ -14,6 +16,7 @@ GIIN began life sometime in July 2025 as a Vite-TypeScript-React template app. T
 Here's a a demo showing basic visual novel features - dialog, a portrait, and interactions through user choices:
 
 <video width="480" height="360" controls><source src={demoLog1} type="video/mp4" /></video>
+_**Figure**. Choices, branching dialog, and portrait support._
 
 Previously, I'd shipped a few adventure games using a proprietary game engine made by C++ programmers; I was a productive designer on that engine and wanted to recreate the snappiness of making games with it.
  
@@ -21,8 +24,8 @@ It used MS Excel to manage variables in the game, which made data normalization 
  
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
-- **React and TypeScript for the interface (frontend) and logic**. I'd coded in React/TypeScript on and off on the job, but always in bits and pieces I decided it was time for me to learn it.
-- **An xlwings Python exporter from MS Excel for the data export**. Previously I'd used xlwings to create prototypes and I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
+- **React and TypeScript** for the frontend and logic: I'd coded in React/TypeScript on and off on the job, but always in bits and pieces I decided it was time for me to learn it.
+- An **xlwings** Python exporter from MS Excel for the data export: Previously I'd used xlwings to create prototypes and I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
 
 ### The first milestone - a data exporter and editor
 
@@ -42,14 +45,27 @@ tk
 
 #### Data export pipeline as proof-of-concept milestone
 
+![DESCRIPTION-tk](/src/assets/memes/no-capes.gif)
+
 _No hardcoded data!_
 
 I wanted a simple **data export pipeline as my first milestone** for the following reasons:
 
-- **Pipeline is everything**. A good pipeline supported by good tools means that mistakes can be corrected quickly, that data (content) can be easily placed into the game, and people can check their own work.
--  **It's a proof-of-concept... to myself**. Making a data exporter is tells me that I have sufficient programming chops, or learning chops, to pull off a simple menu-based game. It's proof that I can make a basic game pipeline from end-to-end.
-- **It enforces data and logic separation early**. Hardcoded data is difficult to find and refactor the longer it stays in the engine.
-- **It makes prototyping quick**.
+##### Pipeline is everything
+
+A good pipeline supported by good tools means that mistakes can be corrected quickly, that data (content) can be easily placed into the game, and people can check their own work.
+
+##### It's a proof-of-concept... to myself
+
+Making a data exporter is tells me that I have sufficient programming chops, or learning chops, to pull off a simple menu-based game. It's proof that I can make a basic game pipeline from end-to-end.
+
+##### It enforces data and logic separation early
+
+Hardcoded data is difficult to find and refactor the longer it stays in the engine.
+
+##### It makes prototyping quick
+
+tk
 
 I also wanted MS Excel as my primary data editor.
 
