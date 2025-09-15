@@ -92,3 +92,8 @@ dd {
   vertical-align: super;
   opacity: 15%;
 }
+
+iframe {
+  height: 480px;
+  width: -webkit-fill-available;
+}

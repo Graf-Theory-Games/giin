@@ -6,6 +6,8 @@ featured: true
 ---
 import demoLog1 from '/src/assets/giin-log3.mp4';
 import giinLogo from '/src/assets/giin-logo-temp.png';
+import sq007b from '/src/assets/sq007b-final.png';
+import excelToPsd from '/src/assets/excel-to-ps-proto.png';
 import { Image } from 'astro:assets';
 
 <Image src={giinLogo} alt='GIIN logo' />
@@ -27,12 +29,29 @@ Previously, I'd shipped a few [hidden object + adventure games](https://store.st
  
 Sleipnir used MS Excel to manage variables in the game, which made data normalization and bulk updates trivial. While it is obvious today to use some spreadsheet export function to JSON or CSV, back in 2010 using Excel to export to `.lua` data files was new to me. (I'd simply added objects manually to a MySQL database before that.)
 
+After creating variables, the designers then prepare a prototype PSD file with the correct layer names that correrspond to the variables in the Excel file:
+
+<Image src={excelToPsd} alt='Excel and PSD export with matching variable names' />
+<Image src={sq007b} alt='Final art of puzzle' />
+Click the video to see a streamer play the puzzle:
+<iframe
+src="https://www.youtube.com/embed/vClmDekSGso?start=761"
+frameborder="0"  
+allowfullscreen></iframe>
+
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
 - **React and TypeScript** for the frontend and logic: I'd coded in React/TypeScript on and off on the job, but always in bits and pieces I decided it was time for me to learn it.
 - An **xlwings** Python exporter from MS Excel for the data export: Previously I'd used xlwings to create prototypes and I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
 
-### The first milestone - a data exporter and editor
+I have used MS Excel for 6 years to handle large amounts of game data and continue to do so for these reasons:
+
+- It's easy to update content in bulk.
+- You can validate data in different ways.
+- You can concatenate from other cells to set up paths and other formulaic values. 
+- Having data in a tabular format makes it easy to normalize the data.
+
+## The first milestone: a data exporter and editor
 
 My first milestone was to be able to quickly export data from Excel into the game.
 
@@ -48,7 +67,7 @@ And in the game UI:
 
 tk
 
-#### Data export pipeline as proof-of-concept milestone
+## Data export pipeline as proof-of-concept milestone
 
 ![No capes meme](/public/memes/no-capes.gif)
 
@@ -56,30 +75,19 @@ _No hardcoded data!_
 
 I wanted a simple **data export pipeline as my first milestone** for the following reasons:
 
-##### Pipeline is everything
+### Pipeline is everything
 
 A good pipeline supported by good tools means that mistakes can be corrected quickly, that data (content) can be easily placed into the game, and people can check their own work.
 
-##### It's a proof-of-concept... to myself
+### It's a proof-of-concept for myself
 
 Making a data exporter is tells me that I have sufficient programming chops, or learning chops, to pull off a simple menu-based game. It's proof that I can make a basic game pipeline from end-to-end.
 
-##### It enforces data and logic separation early
+### It enforces data and logic separation early
 
 Hardcoded data is difficult to find and refactor the longer it stays in the engine.
 
-##### It makes prototyping quick
-
-tk
-
-I also wanted MS Excel as my primary data editor.
-
-- It's easy to update content in bulk.
-- You can validate data in different ways.
-- You can concatenate from other cells to set up paths and other formulaic values. 
-- Having data in a tabular format makes it easy to normalize the data.
-
-#### The method
+## The method
 
 I planned to keep the scope for the exporter as small as I could. I asked myself, _what's the smallest unit of gameplay I can express through data?_ Between incremental mechanics and visual novel mechanics, the easier system is the visual novel, so that's what I decided to work on.
 
