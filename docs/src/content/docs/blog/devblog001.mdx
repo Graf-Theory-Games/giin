@@ -25,24 +25,37 @@ Here's a a demo showing basic visual novel features:
 <video width="480" height="360" controls><source src={demoLog1} type="video/mp4" /></video>
 _**Figure**. Choices, branching dialog, and portrait support._
 
-Previously, I'd shipped a few [hidden object + adventure games](https://store.steampowered.com/app/466030/Otherworld_Spring_of_Shadows_Collectors_Edition/) using a proprietary game engine called Sleipnir made by C++ programmers; I was a productive designer on that engine and wanted to recreate the snappiness of making games with it.
+## Background
+
+Previously, I'd shipped a few [hidden object + adventure games](https://store.steampowered.com/app/466030/Otherworld_Spring_of_Shadows_Collectors_Edition/) using a proprietary C++ game engine called Sleipnir; I was a productive designer on that engine and wanted to recreate the snappiness of making games with it.
  
 Sleipnir used MS Excel to manage variables in the game, which made data normalization and bulk updates trivial. While it is obvious today to use some spreadsheet export function to JSON or CSV, back in 2010 using Excel to export to `.lua` data files was new to me. (I'd simply added objects manually to a MySQL database before that.)
 
-After creating variables, the designers then prepare a prototype PSD file with the correct layer names that correrspond to the variables in the Excel file:
+After scripting in variables (events, actors, actions, et cetera) in Excel, the designers then prepared a prototype PSD file with the correct layer names that corresponded to the variables in the Excel file:
 
 <Image src={excelToPsd} alt='Excel and PSD export with matching variable names' />
+
+Then the artist finalized the art, keeping the layer names intact. A dedicated PSD export tool would cut up the layers into image files.
 <Image src={sq007b} alt='Final art of puzzle' />
-Click the video to see a streamer play the puzzle:
+
+Puzzle mechanics and behaviors were also defined through attributes exported from Excel. See the video to see a streamer play the puzzle:
+
 <iframe
 src="https://www.youtube.com/embed/vClmDekSGso?start=761"
 frameborder="0"  
 allowfullscreen></iframe>
 
+<br />
+
+> _**I really enjoyed using Excel, but I didn't want to make an exporter using VBA.**_
+
+Fortunately, xlwings was already available by the time I felt I was ready to make an exporter.
+
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
-- **React and TypeScript** for the frontend and logic: I'd coded in React/TypeScript on and off on the job, but always in bits and pieces I decided it was time for me to learn it.
-- An **xlwings** Python exporter from MS Excel for the data export: Previously I'd used xlwings to create prototypes and I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
+- **React and TypeScript** for the frontend and logic.
+- An **xlwings** Python exporter from MS Excel for the data export.
+
 
 I have used MS Excel for 6 years to handle large amounts of game data and continue to do so for these reasons:
 
@@ -50,6 +63,7 @@ I have used MS Excel for 6 years to handle large amounts of game data and contin
 - You can validate data in different ways.
 - You can concatenate from other cells to set up paths and other formulaic values. 
 - Having data in a tabular format makes it easy to normalize the data.
+- I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
 
 ## The first milestone: a data exporter and editor
 
@@ -89,7 +103,11 @@ Hardcoded data is difficult to find and refactor the longer it stays in the engi
 
 ## The method
 
-I planned to keep the scope for the exporter as small as I could. I asked myself, _what's the smallest unit of gameplay I can express through data?_ Between incremental mechanics and visual novel mechanics, the easier system is the visual novel, so that's what I decided to work on.
+I planned to keep the scope for the exporter as small as I could. I asked myself, 
+
+> _**What's the smallest unit of gameplay I can express through data?**_ 
+
+Between incremental mechanics and visual novel mechanics, the easier system is the visual novel, so that's what I decided to work on.
 
 A visual novel can be as simple as the player meeting a love interest, talking to them, and increasing the affection level through certain choices. Thus the bare minimum goal was to create:
 
@@ -106,3 +124,10 @@ To make the whole pipeline, I wrote the code in this order:
 
 The pipeline came to life in that order with some backtracking when I needed to correct some design decisions.
 
+## The result
+
+tk
+
+## Next steps
+
+tk
