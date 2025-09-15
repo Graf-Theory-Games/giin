@@ -90,4 +90,5 @@ dd {
 
 .sl-markdown-content .sl-anchor-icon > svg {
   vertical-align: super;
+  opacity: 15%;
 }

@@ -10,21 +10,23 @@ import { Image } from 'astro:assets';
 
 <Image src={giinLogo} alt='GIIN logo' />
 
-Generic Incremental Interactive eNgine (GIIN) is a small game engine for building menu-driven games. It currently supports basic visual novel mechanics similar to [Twine](www.twinery.org), and is in development towards supporting incremental and adventure game mechanics. It is built on ReactJS and is in early development. Its primary data-editing interface is MS Excel.
+**Generic Incremental Interactive eNgine (GIIN)** is a game engine for menu-driven games on the web, currently in early development.
+
+It supports basic visual novel mechanics similar to [Twine](www.twinery.org), and is in development towards supporting incremental and adventure game mechanics. It is built on [ReactJS](https://react.dev/) and its primary data-editing interface is [Microsoft Excel](https://en.wikipedia.org/wiki/Microsoft_Excel).
 
 ## Beginnings
 
-GIIN began life sometime in July 2025 as a Vite-TypeScript-React template app. The initial goal was to create an engine that could make incremental or visual novel games. These genres felt suitable for a single developer to relearn how to make games.
+GIIN began life sometime in July 2025 as a Vite-TypeScript-React template app. The initial goal was to create an engine that could make incremental or visual novel games. These genres felt suitable for a single developer to relearn how to make games. The goal has since expanded to support any menu-driven gameplay.
 
-Here's a a demo showing basic visual novel features - dialog, a portrait, and interactions through user choices:
+Here's a a demo showing basic visual novel features:
 
 <video width="480" height="360" controls><source src={demoLog1} type="video/mp4" /></video>
 _**Figure**. Choices, branching dialog, and portrait support._
 
-Previously, I'd shipped a few adventure games using a proprietary game engine made by C++ programmers; I was a productive designer on that engine and wanted to recreate the snappiness of making games with it.
+Previously, I'd shipped a few [hidden object + adventure games](https://store.steampowered.com/app/466030/Otherworld_Spring_of_Shadows_Collectors_Edition/) using a proprietary game engine called Sleipnir made by C++ programmers; I was a productive designer on that engine and wanted to recreate the snappiness of making games with it.
  
-It used MS Excel to manage variables in the game, which made data normalization and bulk updates trivial. While it is obvious today to use Google Sheets to export to JSON or CSV, back in 2010 using Excel to export to `.lua` data files was new to me. (I'd simply added objects manually to a MySQL database before that.)
- 
+Sleipnir used MS Excel to manage variables in the game, which made data normalization and bulk updates trivial. While it is obvious today to use some spreadsheet export function to JSON or CSV, back in 2010 using Excel to export to `.lua` data files was new to me. (I'd simply added objects manually to a MySQL database before that.)
+
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
 - **React and TypeScript** for the frontend and logic: I'd coded in React/TypeScript on and off on the job, but always in bits and pieces I decided it was time for me to learn it.
@@ -32,7 +34,7 @@ To play to my strengths and to learn new skills, I decided that GIIN would use t
 
 ### The first milestone - a data exporter and editor
 
-My first milestone was to be able to quickly export data from MS Excel into the game.
+My first milestone was to be able to quickly export data from Excel into the game.
 
 Given something like:
 
@@ -48,7 +50,7 @@ tk
 
 #### Data export pipeline as proof-of-concept milestone
 
-![DESCRIPTION-tk](/public/memes/no-capes.gif)
+![No capes meme](/public/memes/no-capes.gif)
 
 _No hardcoded data!_
 
