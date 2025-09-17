@@ -8,6 +8,9 @@ import demoLog1 from '/src/assets/giin-log3.mp4';
 import giinLogo from '/src/assets/giin-logo-temp.png';
 import sq007b from '/src/assets/sq007b-final.png';
 import excelToPsd from '/src/assets/excel-to-ps-proto.png';
+import dv001InterfaceObject from '/src/assets/dv001-interface-object.jpg';
+import dv001LoveInterest from '/src/assets/dv001-loveinterest.jpg';
+import dv001Choices from '/src/assets/dv001-choices.jpg';
 import { Image } from 'astro:assets';
 
 <Image src={giinLogo} alt='GIIN logo' />
@@ -56,7 +59,6 @@ To play to my strengths and to learn new skills, I decided that GIIN would use t
 - **React and TypeScript** for the frontend and logic.
 - An **xlwings** Python exporter from MS Excel for the data export.
 
-
 I have used MS Excel for 6 years to handle large amounts of game data and continue to do so for these reasons:
 
 - It's easy to update content in bulk.
@@ -71,15 +73,22 @@ My first milestone was to be able to quickly export data from Excel into the gam
 
 Given something like:
 
-tk
+<Image src={dv001InterfaceObject} alt='Interface with labeled objects' />
 
-A corresponding table in Excel would look like this:
+Corresponding tables in Excel would look like this:
 
-tk
+<Image src={dv001LoveInterest} alt='Excel tables' />
 
-And in the game UI:
+For the **Love Interest** object, you'd create a new row or entry in the `LoveInterest` sheet, then attach a `stats` array from a separate `stats` sheet. The screenshots provide the following data:
 
-tk
+- There is a love interest the user can romance named **HIKER_BOYFIE**.
+- **HIKER_BOYFIE** has **hiker_stats** which give him an **affection** of **41** out of a max of **99**.
+
+<Image src={dv001Choices} alt='Excel tables' />
+
+- For the **Choices** array, an **identifier** is used to link the choices together, which tells the engine that the three choices belong to the same array.
+- The identifier value, **hiker1** corresponds to an object called the **evtGroup** (Event Group).
+- The **evtGroup** is basically a series of Events or Dialogs that can end in a Choice interaction for the users.
 
 ## Data export pipeline as proof-of-concept milestone
 
