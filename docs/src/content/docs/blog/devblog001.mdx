@@ -31,7 +31,7 @@ GIIN began life sometime in July 2025 as a Vite-TypeScript-React template app. T
 Here's a a demo showing basic visual novel features:
 
 <video width="480" height="360" controls><source src={demoLog1} type="video/mp4" /></video>
-_**Figure**. Choices, branching dialog, and portrait support._
+_Choices, branching dialog, and portrait support._
 
 ## Background
 
@@ -43,10 +43,10 @@ After scripting in variables (events, actors, actions, et cetera) in Excel, the 
 
 <Image src={excelToPsd} alt='Excel and PSD export with matching variable names' />
 
-Then the artist finalized the art, keeping the layer names intact. A dedicated PSD export tool would cut up the layers into image files.
+Then the artist finalized the art, keeping the layer names intact. A dedicated PSD export tool cut up the layers into image files.
 <Image src={sq007b} alt='Final art of puzzle' />
 
-Puzzle mechanics and behaviors were also defined through attributes exported from Excel. See the video to see a streamer play the puzzle:
+Puzzle mechanics and behaviors were also defined through attributes exported from Excel. Watch the video to see a streamer play the puzzle:
 
 <iframe
 src="https://www.youtube.com/embed/vClmDekSGso?start=761"
@@ -55,20 +55,20 @@ allowfullscreen></iframe>
 
 <br />
 
-> _**I really enjoyed using Excel, but I didn't want to make an exporter using VBA.**_
+> _**I really enjoyed using Excel, but for my own projects, I didn't want to make an exporter using VBA.**_
 
-Fortunately, xlwings was already available by the time I felt I was ready to make my own exporter.
+Fortunately, [xlwings](https://www.xlwings.org/) was already available by the time I felt I was ready to make my own exporter.
 
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
-- **React and TypeScript** for the frontend and logic.
+- **React and TypeScript** for the frontend and logic. 
 - An **xlwings** Python exporter from MS Excel for the data export.
 
 I have used MS Excel for 6 years to handle large amounts of game data and continue to do so for these reasons:
 
 - It's easy to update content in bulk.
 - You can validate data in different ways.
-- You can concatenate from other cells to set up paths and other formulaic values. 
+- You can concatenate values from other cells to set up paths and other formulaic values. 
 - Having data in a tabular format makes it easy to normalize the data.
 - I was (and am) more comfortable with Excel data validation, macros, and shortcuts.
 
@@ -106,6 +106,12 @@ I wanted a simple **data export pipeline as my first milestone** for the followi
 ### Pipeline is everything
 
 A good pipeline supported by good tools means that mistakes can be corrected quickly, that data (content) can be easily placed into the game, and people can check their own work.
+
+It boggles my mind that some build pipelines require the artist or designer to **wait** for the programmer to give them a new build after the assets are submitted. No! Content creators, artists and designers, should be able to use the last available build, or a localhost in this case, and put the data and assets themselves, **without a programmer**.
+
+For 6 years of my salaried, professional work as a designer, starting in 2010, my team and I did this, so clearly it's not new technology.
+
+Looking back at old games, both Starcraft and Warcraft 2 had level editors available to burgeoning game designers. Those were some of the earliest game design software available to kids. We sure as hell didn't need a programmer to build a separate exe file for us.
 
 ### It's a proof-of-concept for myself
 
@@ -153,7 +159,8 @@ Most importantly, the data is easy to place into the game for testing.
 
 ## Next steps
 
-- My next goal, feature-wise, is to create a player character. I don't have a player character object yet, so the player character doesn't have a score, or energy, or any other stat.
-- I have to refactor the game screen, written all in React, as I feel my first pass was a little janky.
-- I have to study more about React Hooks because at the moment I use several of them without fully understanding them.
+- **Features**: My next goal, feature-wise, is to create a player character. I don't have a player character object yet, so the player character doesn't have a score, or energy, or any other stat.
+- **Maintenance**: I have to refactor the game screen, written all in React, as I feel my first pass was a little janky.
+- **Learning**: I have to study more about React Hooks because at the moment I use several of them without fully understanding them.
+- **This devlog**: The next post will be about normalization in game design.
 
