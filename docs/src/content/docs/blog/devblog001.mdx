@@ -11,6 +11,9 @@ import excelToPsd from '/src/assets/excel-to-ps-proto.png';
 import dv001InterfaceObject from '/src/assets/dv001-interface-object.jpg';
 import dv001LoveInterest from '/src/assets/dv001-loveinterest.jpg';
 import dv001Choices from '/src/assets/dv001-choices.jpg';
+import dv001EvtGroup from '/src/assets/dv001-evtgroup.jpg';
+import noCapes from '/src/assets/memes/no-capes.gif';
+
 import { Image } from 'astro:assets';
 
 <Image src={giinLogo} alt='GIIN logo' />
@@ -90,9 +93,14 @@ For the **Love Interest** object, you'd create a new row or entry in the `LoveIn
 - The identifier value, **hiker1** corresponds to an object called the **evtGroup** (Event Group).
 - The **evtGroup** is basically a series of Events or Dialogs that can end in a Choice interaction for the users.
 
-## Data export pipeline as proof-of-concept milestone
+<Image src={dv001EvtGroup} alt='Excel tables' />
 
-![No capes meme](/public/memes/no-capes.gif)
+- The **EvtGroup** is the basic building block of the game. It defines a sequence of events and dialog that can end in a choice the user has to make, or it can transition to another EvtGroup.
+- The `hiker1` value for the headers `evts` and `choices` are **lookup values** that say, "look for the identifier `hiker1` in the corresponding sheets".
+
+## Data export pipeline as proof-of-concept milestone 
+
+<Image src={noCapes} alt='No capes meme' />
 
 _No hardcoded data!_
 
