@@ -13,6 +13,8 @@ import dv001LoveInterest from '/src/assets/dv001-loveinterest.jpg';
 import dv001Choices from '/src/assets/dv001-choices.jpg';
 import dv001EvtGroup from '/src/assets/dv001-evtgroup.jpg';
 import noCapes from '/src/assets/memes/no-capes.gif';
+import dv001Breakdown from '/src/assets/dv001-breakdown.png';
+import dv001React from '/src/assets/dv001-react.png';
 
 import { Image } from 'astro:assets';
 
@@ -55,7 +57,7 @@ allowfullscreen></iframe>
 
 > _**I really enjoyed using Excel, but I didn't want to make an exporter using VBA.**_
 
-Fortunately, xlwings was already available by the time I felt I was ready to make an exporter.
+Fortunately, xlwings was already available by the time I felt I was ready to make my own exporter.
 
 To play to my strengths and to learn new skills, I decided that GIIN would use the following:
 
@@ -90,13 +92,8 @@ For the **Love Interest** object, you'd create a new row or entry in the `LoveIn
 <Image src={dv001Choices} alt='Excel tables' />
 
 - For the **Choices** array, an **identifier** is used to link the choices together, which tells the engine that the three choices belong to the same array.
-- The identifier value, **hiker1** corresponds to an object called the **evtGroup** (Event Group).
-- The **evtGroup** is basically a series of Events or Dialogs that can end in a Choice interaction for the users.
 
-<Image src={dv001EvtGroup} alt='Excel tables' />
-
-- The **EvtGroup** is the basic building block of the game. It defines a sequence of events and dialog that can end in a choice the user has to make, or it can transition to another EvtGroup.
-- The `hiker1` value for the headers `evts` and `choices` are **lookup values** that say, "look for the identifier `hiker1` in the corresponding sheets".
+Let's stop here for now; a discussion of the data's architecture is a blog post for another day.
 
 ## Data export pipeline as proof-of-concept milestone 
 
@@ -126,6 +123,8 @@ I planned to keep the scope for the exporter as small as I could. I asked myself
 
 Between incremental mechanics and visual novel mechanics, the easier system is the visual novel, so that's what I decided to work on.
 
+<Image src={dv001Breakdown} alt='Breakdown of Love Interest, Affection, Stat Effects, and Choices in a simple interaction' />
+
 A visual novel can be as simple as the player meeting a love interest, talking to them, and increasing the affection level through certain choices. Thus the bare minimum goal was to create:
 
 - A **love interest** with an **affection** stat.
@@ -139,12 +138,22 @@ To make the whole pipeline, I wrote the code in this order:
 3. **The exporter in Excel**. 
 4. **The game UI, refactored**. I went back to the game UI and removed the hardcoded variables.
 
+<Image src={dv001React} alt='React code and game screen in inset.' />
+_Some code remains hardcoded while I build out the features._
+
 The pipeline came to life in that order with some backtracking when I needed to correct some design decisions.
 
 ## The result
 
-tk
+The result is a simple system that feels dynamic. You can make any number of stats, any number of events, any number of choices, and most importantly, the choices have **consequences** in the form of stat effects. 
+
+Note that you can define stats that **aren't** affection; any stat you want to keep track of, such as hit points, energy, and so on can be scripted in.
+
+Most importantly, the data is easy to place into the game for testing.
 
 ## Next steps
 
-tk
+- My next goal, feature-wise, is to create a player character. I don't have a player character object yet, so the player character doesn't have a score, or energy, or any other stat.
+- I have to refactor the game screen, written all in React, as I feel my first pass was a little janky.
+- I have to study more about React Hooks because at the moment I use several of them without fully understanding them.
+
