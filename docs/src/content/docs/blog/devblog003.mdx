@@ -1,0 +1,24 @@
+---
+title: "The naming of things: modals, popups, screens, and windows"
+date: 2025-09-26
+slug: 2025-09-26-devblog
+---
+
+**Modals** these days are a catchall term for any floating window that doth appear upon the app or site or what-have-you. Modal is a [shorthand for modal dialog](https://learn.microsoft.com/en-us/cpp/mfc/modal-and-modeless-dialog-boxes?view=msvc-170), so in the term hierarchy, modal or modeless dialogs are a narrower term, and dialogs are the broader term.
+
+
+
+> **For my very first modal, I went with `SubMenuWindow`**.
+
+Sounds ancient, I know. But "modal" by itself isn't helpful. It's so wide a term that it doesn't tell this forgetful programmer (that's me!) what it is for.
+
+So: a `SubMenuWindow`. The entire game screen is the main window. Clicking on something like **Location** or **Quests**, if I have something like that, will open a **SubMenu**. But that isn't specific enough, because the floating submenus also refer to the menus for **File** and **Help** in so many desktop apps. So I had to specify **Window** to make sure I remembered this refers to something that goes on top of the main screen.
+
+Does a **Window** imply that it doesn't eat up the whole screen? I'd say you can have w
+
+
+
+What about **Popup**? What about **alert boxes**? What's the difference between a box and a window, or a toast?
+
+Here's my personal, subjective hierarchy
+
