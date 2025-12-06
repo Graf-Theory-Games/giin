@@ -1,5 +1,5 @@
 ---
-title: Normalization in game design
+title: Floors, ceilings, and normalization in game design
 date: 2025-10-13
 slug: 2025-10-13-devblog
 featured: true
@@ -7,4 +7,111 @@ featured: true
 
 import { Image } from 'astro:assets';
 
-Normalization in game design
+Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
+
+Floors and ceilings help define the size, scale, and scope of the core loop of a game.
+
+## A strategy game example
+
+Let's look at a strategy game with two systems, **unit types** and **terrain**:
+
+| Unit types   | Terrain    |
+| -------      | ------     |
+| Infantry     | Rivers      |
+| Cavalry      | Plains |
+| Supply wagon | Paved roads |
+
+In this hypothetical game, one of your tasks as a designer is to decide on movement bonuses or penalties.
+
+Here's one possible configuration:
+
+| Unit type | Rivers  | Plains | Paved roads |
+| --------  | ------ | ---------- | ---------- |
+| Infantry     | 0   | +1 tile    | +2 tiles |
+| Cavalry      | 0   | +2 tiles   | +4 tiles |
+| Supply wagon | 0   | +0          | +2 tiles |
+
+Here's another one:
+
+| Unit type | Rivers  | Plains | Paved roads |
+| --------  | ------ | ---------- | ---------- |
+| Infantry     | -1 tiles | 0         | +3 tiles |
+| Cavalry      | -3 tiles | +3 tiles | +6 tiles |
+| Supply wagon | -6 tiles | -3 tiles | +3 tiles  |
+
+You can come up with justifications for these values, but ultimately the important thing is that the differentiations are significant to the user. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units? What is "slightly slower" versus "too slow"? 
+
+> **Instinctively, we know that differentiation requires a floor and ceiling**.
+
+If the greatest possible value is 9 tiles, then instinctively we can _feel_ that "spacing" unit buffs or debuffs by 3 (3, 6, 9) might be meaningful, but if we change the highest value is 50, then assigning values such as 3, 6, 9 is obviously going to muddle the units.
+
+Before we move on to _how to choose_ values, however, let's go over a more practical question: 
+
+How do you scale up those numbers to create 30 unit types, or even 100 unit types without someone messing up by typing in an extra 0, or accidentally omitting the `-` sign?
+
+## Applying basic normalization
+
+Here's another way of viewing bonuses and penalties:
+
+| Scale name | Value |
+| -------  | ------ |
+| Best | +7      |
+| Great   | +5 |
+| Good    | +3 |
+| Neutral | 0 |
+| Bad | -3 |
+| Terrible | -5 |
+| Worst | -7 |
+
+By setting these variables or constants in one place, such as a constants file, you can reuse the values anywhere. Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table is basic normalization in game design.
+
+(For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
+
+Additionally, if you need to rebalance the "Good" value, you only need to edit its definition in one file. Let's say that given 3 factions, each faction has 5 units that make use of a "small" buff, i.e. the "Good"-level buff. That's 15 units that can be instantly rebalanced by changing only one value.
+
+## Establishing the size of a game loop
+
+A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings. (Would scaling their movement by ^2 retain their utility?)
+
+It's also easy for us to agree that in _general_: 
+
+- All other things being equal, a large map in StarCraft where the players are situated at opposite ends, will take longer to finish than a smaller map.
+- A 3vs3 Pokemon battle will be shorter than a full 6vs6.
+
+> The average completion of a core loop, such as a battle, is measured in the **average number of moves** made to complete the loop.
+
+Let's say we want an RPG player-versus-player game to be about 3-5 minutes long.
+
+Let's say that player A and player B use similar characters: 
+
+| Character lineup | Atk | HP |
+| -------  | ------ | ------ |
+| Character 1 | 5    | 100 |
+| Character 2 | 9    | 75  |
+| Character 3 | 5    | 120 |
+| Character 4 | 7    | 90  |
+
+**Total HP**: 385
+
+**Total Atk**: 26
+
+Dividing the **total HP by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
+
+It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players. So at a minimum, 30 turns.
+
+Computing for game length:
+
+| Game length | Turns per minute | Seconds per turn |
+| -------  | ------ | ------ | 
+| 3 minutes long | 10 turns | 6 seconds |
+| 5 minutes long | 6 turns | 10 seconds |
+
+Inagine deciding on the actions of 4 characters in 6 seconds! It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's try to keep it to 6 turns by reducing the HP.
+
+Let's get the total HP to end a party in 6 turns: 26 (total **Atk**) * 6 = 156. That's a reduction of 229 HP spread over the entire party, or a baseline of about 57HP per character. Some characters will have more HP and less **Atk**. But that's a problem for later. For now, let's take a look at the turns per minute and seconds per turn:
+
+
+
+## Summary
+
+- For turn based games, compute the length of a core loop by the number of moves or turns needed to finish the loop. The values themselves are **emotional**!
