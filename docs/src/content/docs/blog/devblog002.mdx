@@ -1,5 +1,5 @@
 ---
-title: Floors, ceilings, and normalization in game design
+title: Fundamental stat setting and normalization in games
 date: 2025-10-13
 slug: 2025-10-13-devblog
 featured: true
@@ -7,18 +7,20 @@ featured: true
 
 import { Image } from 'astro:assets';
 
-Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
+_[tk should have an image]_
 
-Floors and ceilings help define the size, scale, and scope of the core loop of a game.
+The environment of a game is largely controlled by invisible sliders, dials, and levers. How do we game designers know to what setting these controls should be? By identifying **core factors**, we're able to set a goal or ideal towards which we can set initial values and then playtest and tweak for.
+
+Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
 
 ## A strategy game example
 
 Let's look at a strategy game with two systems, **unit types** and **terrain**:
 
-| Unit types   | Terrain    |
-| -------      | ------     |
-| Infantry     | Rivers      |
-| Cavalry      | Plains |
+| Unit types   | Terrain |
+| -------      | ------- |
+| Infantry     | Rivers  |
+| Cavalry      | Plains  |
 | Supply wagon | Paved roads |
 
 In this hypothetical game, one of your tasks as a designer is to decide on movement bonuses or penalties.
