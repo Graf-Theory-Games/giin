@@ -5,17 +5,67 @@ slug: 2025-10-13-devblog
 featured: true
 ---
 
+import cessna from '/src/assets/dv002-cessna.jpg';
+import sliders from '/src/assets/dv002-sliders.jpg'
+import square from '/src/assets/dv002-square.jpg'
+import triace from '/src/assets/dv002-triace.jpg'
+
 import { Image } from 'astro:assets';
 
-_[tk should have an image]_
+<Image src={cessna} alt='By Olga Ernst - Own work, CC BY-SA 4.0' />
+_The environment of a game is largely controlled by invisible sliders, dials, and levers._
 
-The environment of a game is largely controlled by invisible sliders, dials, and levers. How do we game designers know what values to set? By identifying some anchors or constraints, we're able to set a goal or ideal towards which we can set initial values and then playtest and tweak for.
+How do we game designers know what values to use for our video games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
+
+<Image src={square} alt='' />
+_Square games in the 90s and early 2000s capped out at 255 for each whole number stat and 9999 for HP._
+
+<Image src={triace} alt='' />
+_tri-Ace games in the 90s and early 2000s capped out... wherever the hell they wanted to._
+tk retake this screenshot
+
+One method of figuring out the number is to build from an atom of gameplay. You'd build the core loop, or even a set of gameplay loops, giving yourself a deadline measured in weeks to less than a quarter to assemble a prototype with placeholders. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+
+Another method is to work backwards, or to begin with the end in mind, which in this case means a complete public beta. I've done this in professional (salaried) environments where a period of experimentation is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. The team is usually able to figure out the costing for the game and the size of content based on results during the experimentation phase. This method is not within this blog post's scope.
+
+## The basics of working forward
+
+The play time and how long it takes for you to make enough content and programming to achieve that play time.
+
+1. Figure out your core loop.
+1. Plan the core loop.
+1. Compute the 
+
+
+## Working forwards still starts with a deadline
+
+The first constraint of a game, as with any project, is its budget. And aside from cash, capital, dinero, moolah, there is another budget that will not be budged: time.
+
+The question to answer is: how long will it take you to make a prototype of a core loop.
+
+
+
+{/*
+1. Decide on the scope of your game through constraints. Your game's scope is defined by its **play time**. You're working backwards from the resources currently available to you.
+1. Identify repeating building blocks of gameplay. Your core loop will be among these, but there will be many other important loops.
+1. Dig for your initial values by prototyping the core loop. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
+1. Once the prototype has been finished with reasonable placeholder pauses for animation and cueing, test the values.
+
+This blog post mostly goes over steps (2) and (3), but also discusses the remaining steps to help give an idea of how they affect stat-setting.
+*/}
 
 ## Establishing the size of a game
 
-Outside of games, how does one decide on the size of a project? Say a home improvement project, such as building a small climbing wall. What factors decide how big can be? Safety, surely, and also the hard constraint of your floor size. Once you've found a place for it, you'll have to figure out how many panels and studs and holds you'll need. As with anything else, you are faced with the ancient need to balance a book.
+Outside of games, how does one decide on the size of a project? Say a home improvement project, such as building a small climbing wall. What factors decide how big the project can be? Safety, surely, and also the hard constraint of your floor size. Also your appetite for construction work and actual experience doing it.
 
-### Working backwards with a budget 
+Once you've found a place for the wall and done some examined how motivated you actually are, you'll have to figure out how many panels and studs and holds you'll need. As with anything else, you are faced with the ancient task of balancing a book.
+
+
+Capital can be raised and re-raised, the house can be put on a mortgage, you can pawn your jewelry or watch collection, but you can't buy time.
+
+Now it seems a daunting task to say definitively that you will spend 3 years making a 7-hour game alone. The good news! You don't need to know for sure how much time you have. Why is this? Because when you're starting from nothing, the first rule is to focus on going from 0 to 1.
+
+### Working backwards, AKA working with the end in mind
 
 ### Working forwards with the smallest possible game loop
 
