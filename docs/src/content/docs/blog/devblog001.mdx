@@ -115,7 +115,7 @@ Looking back at old games, both Starcraft and Warcraft 2 had level editors avail
 
 ### It's a proof-of-concept for myself
 
-Making a data exporter is tells me that I have sufficient programming chops, or learning chops, to pull off a simple menu-based game. It's proof that I can make a basic game pipeline from end-to-end.
+Making a data exporter tells me that I have sufficient programming chops, or learning chops, to pull off a simple menu-based game. It's proof that I can make a basic game pipeline from end-to-end.
 
 ### It enforces data and logic separation early
 
@@ -140,8 +140,8 @@ A visual novel can be as simple as the player meeting a love interest, talking t
 To make the whole pipeline, I wrote the code in this order:
 
 1. **The initial game UI (or frontend) in React**. The game at this point used hardcoded, dummy data stored as variables.
-2. **The game objects, such as the concept of a love interest, a stat, a choice**. I used object-oriented programming for these. At this stage I wrote some classes, then their instances were imported into the game UI. The instances were still in a sense hardcoded, in that they were still difficult to create or update in bulk.
-3. **The exporter in Excel**. 
+2. **The game objects, such as the concept of a love interest, a stat, a choice**. I used object-oriented programming for these. At this stage I wrote some classes (`LoveInterest`, `Dialog`), then their instances were imported into the game UI. The instances were still in a sense hardcoded, in that they were still difficult to create or update in bulk.
+3. **The exporter in Excel**. I wrote an exporter then moved the instances or objects, such as `HIKER_BOYFIE` and his default affection stat, into the exporter. At this stage it was trivial to update values. 
 4. **The game UI, refactored**. I went back to the game UI and removed the hardcoded variables.
 
 <Image src={dv001React} alt='React code and game screen in inset.' />
@@ -153,7 +153,7 @@ The pipeline came to life in that order with some backtracking when I needed to 
 
 The result is a simple system that feels dynamic. You can make any number of stats, any number of events, any number of choices, and most importantly, the choices have **consequences** in the form of stat effects. 
 
-Note that you can define stats that **aren't** affection; any stat you want to keep track of, such as hit points, energy, and so on can be scripted in.
+Note that you can define more stats, not just affection; any stat you want to keep track of, such as hit points, energy, and so on can be defined.
 
 Most importantly, the data is easy to place into the game for testing.
 
