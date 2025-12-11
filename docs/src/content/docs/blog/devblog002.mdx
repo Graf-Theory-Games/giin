@@ -24,26 +24,32 @@ _Square games in the 90s and early 2000s capped out at 255 for each whole number
 _tri-Ace games in the 90s and early 2000s capped out... wherever the hell they wanted to._
 tk retake this screenshot
 
-## Working forward and working backward
+## Working forwards or backwards
 
-One method of figuring out values for stats, is to prototype an atom of gameplay, working forward. This is typically the core loop, and possibly 2-3 other loops, giving yourself a deadline measured in weeks to at most a quarter of a year. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+One method to figure out values for stats, is to prototype an atom of gameplay, **working forward**. You'd start prototyping the core loop, possibly 2-3 other loops, giving yourself a deadline measured in weeks, not months. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
 
-Another method is to work backwards, or to begin with the end in mind. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. With this method, The team is usually able to figure out the costing for the game and the amount of content based on results during the experimentation phase.
+Another method is to **work backwards**, or to begin with the end in mind. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. You're not just doing a core loop prototype. With this method, the team is usually able to figure out the costing for the game and the amount of content based on results during this vertical slice and experimentation phase.
 
-Knowing the **amount** of content absolutely matters for stat adjustment — if you know your team can only make 60 unique creature designs in time for public beta, and you have an evolution mechanism, that works out to 30 monsters (each monster needs a unique "child" and "adult" form) thus the leveling formula has to account for that.
+### Short detour on working backwards
 
-By working with a final deadline, we are also able to set a **cutoff line** that keeps scope creep at bay, among other things. However, this method is not within this blog post's scope; today we'll be focusing on the "working forward" approach.
+Knowing the **amount** of content absolutely matters for stat adjustment — if you know your team can only make 60 unique creature designs in time for public beta, and you have an evolution mechanism, that works out to 30 monsters (each monster needs a unique "child" and "adult" design) thus the leveling formula has to account for that.
+
+By working with a final deadline, we are also able to set a **cutoff line** that keeps scope creep at bay, among other things.
+
+However, this method is not within this blog post's scope; today we'll be focusing on the "working forward" approach.
 
 ## The basics of working forward
 
-The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set based on your self-reflection and experience. You may want to start conservatively until you have the experience to confidently say you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
+The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set based on your self-reflection and experience.
+
+You may want to start conservatively until you have the experience to confidently say you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
 
 1. Figure out your core loop. You can do this by identifying repeating building blocks of gameplay. Your core loop will be among these, but there will be many other important loops.
 1. Write the sequence of the core loop. What steps will the user do?
 1. Compute the number of moves it takes to finish the core loop. Moves can either be **turn-based** or **time-based**. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
-    - An example of a time-based move is a basic slash of a Paladin from Warcraft.
+    - An example of a time-based move is a basic slash of a Paladin from Warcraft. You can expect a Paladin to slash every N seconds.
     - An example of a turn-based move is the Attack option in Suikoden II.
-1. Dig for your initial values by prototyping the core loop. 
+1. Prototype the core loop. 
 1. Once the prototype has been finished with reasonable placeholder pauses for animation and cueing, test the values.
 
 This blog post mostly explores step (3), but also touches on other steps broadly to help give an idea of how they affect stat-setting.
@@ -100,7 +106,7 @@ Now we wanted our battle to last 3-5 minutes, or 180-300 seconds. Let's work bac
 300 seconds / 30 turns = 10 seconds per turn
 ```
 
-6-10 seconds per turn is too little time to decide on the actions of 4 players, so it's obvious that these numbers are unrealistic. The game will definitely drag on to more than 5 minutes, especially once we add other options aside from Attack.
+6-10 seconds per turn is too little time to decide on the actions of 4 characters, so it's obvious that these numbers are unrealistic. The game will definitely drag on to more than 5 minutes, especially once we add other options aside from Attack.
 
 It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's create a limit of 6 turns by reducing the HP.
 
@@ -130,7 +136,13 @@ For now let's apply it evenly across the board:
 
 Just from reading those numbers and their variance between characters you can already see the tension much more clearly — and we haven't even touched on other actions, such as Magic, or events such as Miss and Critical.
 
-### Should we use big numbers or small?
+### Using "big" or "small" numbers
+
+What meaning do numbers have if a game's core loop is measured in moves? The choice of big (`9,999`, `99,999`) or small (`99`) numbers boils down to utility and emotion.
+
+
+tk ffviii 
+To keep  battle relevant (or less of a total slaughter), enemies scale to the same level as the protagonists in FFVIII regardless of territory.
 
 A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings.
 
@@ -139,12 +151,20 @@ Some things to ponder:
 - If we scale the movement up, does that mean that the game would take more time to finish?
 - Would scaling movement by ^2 retain the utility of the chess piece?
 
+In other words, would scaling up be meaningful?
+
+tk the answer is obviously no
+
+
+Let's take a look at the case for small numbers.
+
 #### Small numbers for PVP
+
+Card and board games keep their numbers relatively small, at least until power creep takes over (see: Pokemon TCG). This is because players do the math themselves.
 
 #### Big numbers for expressing game progression
 
-###
-
+## Our last big subject for today: normalization
 
 Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
 
@@ -163,7 +183,8 @@ Based off of these images, we can identify the following components:
 - A board composed of tiles
 - These tiles represent terrain, and have bonuses or penalties depending on the unit traversing them.
 - Units with movement and strength stats.
-Let's look at a strategy game with two systems, **unit types** and **terrain**:
+
+So let's set up some stats for a strategy game with two systems, **unit types** and **terrain**:
 
 | Unit types   | Terrain |
 | -------      | ------- |
@@ -189,11 +210,13 @@ Here's another one:
 | Cavalry      | -3 tiles | +3 tiles | +6 tiles |
 | Supply wagon | -6 tiles | -3 tiles | +3 tiles  |
 
-You can come up with justifications for these values, but ultimately the important thing is that the differentiations are significant to the user. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units? What is "slightly slower" versus "too slow"? 
+You can come up with justifications for these values, but ultimately the important thing is that the differentiations are meaningful to the user, just as in our earlier example of RPG battle. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units? What is "slightly slower" versus "too slow"? 
 
 > **Instinctively, we know that differentiation requires a floor and ceiling**.
 
-If the greatest possible value is 9 tiles, then instinctively we can _feel_ that "spacing" unit buffs or debuffs by 3 (3, 6, 9) might be meaningful, but if we change the highest value is 50, then assigning values such as 3, 6, 9 is obviously going to muddle the units.
+If the greatest possible value is 9 tiles, then instinctively we can _feel_ that "spacing" unit buffs or debuffs by 3 (3, 6, 9) might be meaningful, but if we change the highest value to 50, then assigning values such as 3, 6, 9 is obviously going to muddle the units.
+
+tk It's all about percentages
 
 Before we move on to _how to choose_ values, however, let's go over a more practical question: 
 
@@ -218,6 +241,10 @@ By setting these variables or constants in one place, such as a constants file, 
 (For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
 
 Additionally, if you need to rebalance the "Good" value, you only need to edit its definition in one file. Let's say that given 3 factions, each faction has 5 units that make use of a "small" buff, i.e. the "Good"-level buff. That's 15 units that can be instantly rebalanced by changing only one value.
+
+### Applying ceilings and floors in stats
+
+An earlier section of this post discussed the reason for choosing big or small numbers and how everything boils down to moves. The same can be applied to strategy games.
 
 ## Summary
 
