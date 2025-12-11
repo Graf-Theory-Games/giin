@@ -26,96 +26,143 @@ tk retake this screenshot
 
 ## Working forward and working backward
 
-One method of figuring out values for stats, is to prototype an atom of gameplay, working forward. You'd build the core loop, or even a set of gameplay loops, giving yourself a deadline measured in weeks to at most a quarter of a year, to assemble a prototype with placeholder art and animation pauses. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+One method of figuring out values for stats, is to prototype an atom of gameplay, working forward. This is typically the core loop, and possibly 2-3 other loops, giving yourself a deadline measured in weeks to at most a quarter of a year. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
 
-Another method is to work backwards, or to begin with the end in mind, which in this case means a complete public beta. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. The team is usually able to figure out the costing for the game and the size of content based on results during the experimentation phase. By working with a final deadline, we are able to set a **cutoff line** that keeps scope creep at bay, among other things. This method is not within this blog post's scope; today we'll be focusing on the "working forward" approach.
+Another method is to work backwards, or to begin with the end in mind. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. With this method, The team is usually able to figure out the costing for the game and the amount of content based on results during the experimentation phase.
+
+Knowing the **amount** of content absolutely matters for stat adjustment — if you know your team can only make 60 unique creature designs in time for public beta, and you have an evolution mechanism, that works out to 30 monsters (each monster needs a unique "child" and "adult" form) thus the leveling formula has to account for that.
+
+By working with a final deadline, we are also able to set a **cutoff line** that keeps scope creep at bay, among other things. However, this method is not within this blog post's scope; today we'll be focusing on the "working forward" approach.
 
 ## The basics of working forward
 
-The play time and how long it takes for you to make enough content and programming to achieve that play time.
+The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set based on your self-reflection and experience. You may want to start conservatively until you have the experience to confidently say you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
 
-1. Figure out your core loop.
-1. Plan the core loop.
-1. Compute the 
-
-
-## Working forwards still starts with a deadline
-
-The first constraint of a game, as with any project, is its budget. And aside from cash, capital, dinero, moolah, there is another budget that will not be budged: time.
-
-The question to answer is: how long will it take you to make a prototype of a core loop.
-
-
-
-{/*
-1. Decide on the scope of your game through constraints. Your game's scope is defined by its **play time**. You're working backwards from the resources currently available to you.
-1. Identify repeating building blocks of gameplay. Your core loop will be among these, but there will be many other important loops.
-1. Dig for your initial values by prototyping the core loop. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
+1. Figure out your core loop. You can do this by identifying repeating building blocks of gameplay. Your core loop will be among these, but there will be many other important loops.
+1. Write the sequence of the core loop. What steps will the user do?
+1. Compute the number of moves it takes to finish the core loop. Moves can either be **turn-based** or **time-based**. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
+    - An example of a time-based move is a basic slash of a Paladin from Warcraft.
+    - An example of a turn-based move is the Attack option in Suikoden II.
+1. Dig for your initial values by prototyping the core loop. 
 1. Once the prototype has been finished with reasonable placeholder pauses for animation and cueing, test the values.
 
-This blog post mostly goes over steps (2) and (3), but also discusses the remaining steps to help give an idea of how they affect stat-setting.
-*/}
+This blog post mostly explores step (3), but also touches on other steps broadly to help give an idea of how they affect stat-setting.
 
-## Establishing the size of a game
+## Choosing an RPG game's core loop
 
-Outside of games, how does one decide on the size of a project? Say a home improvement project, such as building a small climbing wall. What factors decide how big the project can be? Safety, surely, and also the hard constraint of your floor size. Also your appetite for construction work and actual experience doing it.
+RPGs have several major systems, including but not limited to:
 
-Once you've found a place for the wall and done some examined how motivated you actually are, you'll have to figure out how many panels and studs and holds you'll need. As with anything else, you are faced with the ancient task of balancing a book.
+- Exploration
+- Battle
+- Crafting
 
+For the purposes of this blog post, let's take a look at a typical battle. The **win condition** of a battle is straightforward: it ends when the enemy party's hit points (HP) hits zero. To finish the core loop, you just have to keep decrementing the HP, typically through an attack. So when you prototype the battle, you can start with as little as:
 
-Capital can be raised and re-raised, the house can be put on a mortgage, you can pawn your jewelry or watch collection, but you can't buy time.
+- The characters
+- An attack command
+- Hit points
+- Attack or damage points
 
-Now it seems a daunting task to say definitively that you will spend 3 years making a 7-hour game alone. The good news! You don't need to know for sure how much time you have. Why is this? Because when you're starting from nothing, the first rule is to focus on going from 0 to 1.
+### Controlling the size of a battle
 
-### Working backwards, AKA working with the end in mind
-
-### Working forwards with the smallest possible game loop
-
-A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings. (Would scaling their movement by ^2 retain their utility?)
-
-It's also easy for us to agree that in _general_: 
+Here are two hopefully uncontroversial statements:
 
 - All other things being equal, a large map in StarCraft where the players are situated at opposite ends, will take longer to finish than a smaller map.
-- A 3vs3 Pokemon battle will be shorter than a full 6vs6.
-
-> The average completion of a core loop, such as a battle, is measured in the **average number of moves** made to complete the loop.
+- All other things being equal, A 3vs3 Pokemon battle will be shorter than a full 6vs6.
 
 Let's say we want an RPG player-versus-player game to be about 3-5 minutes long.
+
+> The average completion of a core loop such as an RPG battle can be measured in the **average number of moves or turns** made to complete the loop.
 
 Let's say that player A and player B use similar characters: 
 
 | Character lineup | Atk | HP |
-| -------  | ------ | ------ |
-| Character 1 | 5    | 100 |
-| Character 2 | 9    | 75  |
-| Character 3 | 5    | 120 |
-| Character 4 | 7    | 90  |
+| -------          | ------ | ------ |
+|  Abel            | 5    | 100 |
+|  Benjamin        | 9    | 75  |
+|  Cain            | 5    | 120 |
+|  Daniel          | 7    | 90  |
 
 **Total HP**: 385
 
 **Total Atk**: 26
 
-Dividing the **total HP by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
+(tk add a bar here showing how miniscule 26 is against 385)
+
+Dividing the **total HP** by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
 
 It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players. So at a minimum, 30 turns.
 
-Computing for game length:
+Now we wanted our battle to last 3-5 minutes, or 180-300 seconds. Let's work backwards from those values:
 
-| Game length | Turns per minute | Seconds per turn |
-| -------  | ------ | ------ | 
-| 3 minutes long | 10 turns | 6 seconds |
-| 5 minutes long | 6 turns | 10 seconds |
+```
+180 seconds / 30 turns = 6 seconds per turn
+300 seconds / 30 turns = 10 seconds per turn
+```
 
-Inagine deciding on the actions of 4 characters in 6 seconds! It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's try to keep it to 6 turns by reducing the HP.
+6-10 seconds per turn is too little time to decide on the actions of 4 players, so it's obvious that these numbers are unrealistic. The game will definitely drag on to more than 5 minutes, especially once we add other options aside from Attack.
 
-Let's get the total HP to end a party in 6 turns: 26 (total **Atk**) * 6 = 156. That's a reduction of 229 HP spread over the entire party, or a baseline of about 57HP per character. Some characters will have more HP and less **Atk**. But that's a problem for later. For now, let's take a look at the turns per minute and seconds per turn:
+It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's create a limit of 6 turns by reducing the HP.
 
+Let's get the total HP to end a party in 6 turns: 
+
+```
+(Total Atk) * (Ideal number of turns) = (New Total HP)
+    26      *           6             = 156
+
+
+(Previous Total HP) - (New Total HP) = (Reduction in HP)
+        385         -     156           = 229
+```
+
+
+That comes to a 57HP reduction per character.
+
+For now let's apply it evenly across the board:
+
+| Character lineup | Atk | HP |
+| -------          | ------ | ------ |
+|  Abel            | 5    | 43 |
+|  Benjamin        | 9    | 18  |
+|  Cain            | 5    | 63 |
+|  Daniel          | 7    | 33  |
+
+
+Just from reading those numbers and their variance between characters you can already see the tension much more clearly — and we haven't even touched on other actions, such as Magic, or events such as Miss and Critical.
+
+### Should we use big numbers or small?
+
+A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings.
+
+Some things to ponder:
+
+- If we scale the movement up, does that mean that the game would take more time to finish?
+- Would scaling movement by ^2 retain the utility of the chess piece?
+
+#### Small numbers for PVP
+
+#### Big numbers for expressing game progression
+
+###
 
 
 Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
 
 ## A strategy game example
 
+Let's look at the ingredients of a turn-based strategy game.
+
+Fire Emblem UI
+
+Advance Wars 2 UI
+
+Stratego
+
+Based off of these images, we can identify the following components:
+
+- A board composed of tiles
+- These tiles represent terrain, and have bonuses or penalties depending on the unit traversing them.
+- Units with movement and strength stats.
 Let's look at a strategy game with two systems, **unit types** and **terrain**:
 
 | Unit types   | Terrain |
@@ -171,8 +218,6 @@ By setting these variables or constants in one place, such as a constants file, 
 (For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
 
 Additionally, if you need to rebalance the "Good" value, you only need to edit its definition in one file. Let's say that given 3 factions, each faction has 5 units that make use of a "small" buff, i.e. the "Good"-level buff. That's 15 units that can be instantly rebalanced by changing only one value.
-
-
 
 ## Summary
 
