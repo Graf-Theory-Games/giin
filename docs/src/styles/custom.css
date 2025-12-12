@@ -117,3 +117,8 @@ tbody > tr:nth-child(odd){
 .sl-markdown-content :is(th:last-child, td:last-child):not(:where(.not-content *)) {
   padding-inline-end: 0.8rem;
 }
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -5,27 +5,27 @@ slug: 2025-10-13-devblog
 featured: true
 ---
 
-import cessna from '/src/assets/dv002-cessna.jpg';
+import playtime from '/src/assets/dv002-playtime.jpg';
 import sliders from '/src/assets/dv002-sliders.jpg'
 import square from '/src/assets/dv002-square.jpg'
-import triace from '/src/assets/dv002-triace.jpg'
+import triace from '/src/assets/dv002-triace.png'
+import party from '/src/assets/dv002-6v6.jpg'
 
 import { Image } from 'astro:assets';
 
 How do we game designers know what values to use for our video games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
 
-<Image src={square} alt='' />
-_Square games in the 90s and early 2000s capped out at 255 for each whole number stat and 9999 for HP._
+<Image src={square} alt='' width={256} layout='constrained' />
+_Square games in the 90s and early 2000s capped out at **255** for each whole number stat and **9999** for HP._
 
 <Image src={triace} alt='' />
 _tri-Ace games in the 90s and early 2000s capped out... wherever the hell they wanted to._
-tk retake this screenshot
 
 ## Working forwards or backwards
 
-One method to figure out values for stats, is to prototype an atom of gameplay, **working forward**. You'd start prototyping the core loop, possibly 2-3 other loops, giving yourself a deadline measured in weeks, not months. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+One method to figure out values for stats is to prototype a core loop of gameplay, **working forward**. You'd start prototyping the this loop, and possibly 2-3 other loops, giving yourself a deadline measured in weeks, not months. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
 
-Another method is to **work backwards**, or to begin with the end in mind. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. You're not just doing a core loop prototype. With this method, the team is usually able to figure out the costing for the game and the amount of content based on results during this vertical slice and experimentation phase.
+Another method is to **work backwards**, or to begin with the end in mind. I've done this with projects where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. You're not just doing a core loop prototype. With this method, the team is usually able to figure out the costing for the game and the amount of content based on results during this vertical slice and experimentation phase.
 
 ### A short note on working backwards
 
@@ -33,15 +33,17 @@ Knowing the **amount** of content absolutely matters for stat adjustment — if 
 
 By working with a final deadline, we are also able to set a **cutoff line** that keeps scope creep at bay, among other things.
 
-However, this method is not within this blog post's scope; today we'll be focusing on the "working forward" approach.
+Today however we'll be focusing on the "working forward" approach.
 
 ## The basics of working forward
 
 The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set and refine based on your self-reflection and experience.
 
+<Image src={playtime} alt='' width={480} />
+
 You may want to start conservatively until you have the experience to assert that you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
 
-1. Figure out your core loop. You can do this by identifying **repeating blocks of gameplay**. Your core loop will be among these, but there will be many other important loops.
+1. Figure out your core loop. You can do this by identifying **repeating blocks of gameplay with clear win conditions**. Your core loop will be among these, but there will be many other important loops.
 1. Write the sequence of the core loop. What steps will the user do?
 1. Compute the number of moves it takes to finish the core loop. Moves can either be **turn-based** or **time-based**. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
     - An example of a time-based move is a basic slash of a Paladin from Warcraft. You can expect a Paladin to slash every N seconds.
@@ -59,12 +61,17 @@ RPGs have several major systems, including but not limited to:
 - Battle
 - Crafting
 
-For the purposes of this blog post, let's take a look at a typical battle. The **win condition** of a battle is straightforward: it ends when the enemy party's hit points (HP) hits zero. To finish the core loop, you just have to keep decrementing the HP, typically through an attack. So when you prototype the battle, you can start with as little as:
+Any one of these could form the core loop of a game.
+
+For the purposes of this blog post, let's take a look at a typical battle loop. The **win condition** of a battle is straightforward: it ends when the enemy party's hit points (HP) hits zero. To finish the core loop, you just have to keep decrementing the HP, typically through an attack. So when you prototype the battle, you can start with as little as:
 
 - The characters
 - An attack command
 - Hit points
 - Attack or damage points
+
+<Image src={party} alt='' layout='constrained' />
+_3-vs-3, 4-vs-4, and 6-vs-6 party sizes have to be set up in such a way that battle isn't tedious._
 
 ### Controlling the size of a gameplay loop
 
@@ -142,7 +149,7 @@ What meaning do numbers have if a game's core loop is measured in moves? The cho
 tk ffviii 
 _In many RPGs, the HP of monsters is set. This means that when the player returns to their beginning town after 10 hours of gameplay, the monsters are easily slaughtered. To keep battle relevant, enemies scale to the same level as the protagonists in FFVIII regardless of location._
 
-### 
+### Bigger isn't always meaningful  
 
 A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings.
 
@@ -155,12 +162,14 @@ In other words, would scaling up be meaningful?
 
 tk the answer is obviously no
 
-
 Let's take a look at the case for small numbers.
 
 #### Small numbers for PVP and prototyping
 
-Many card and board games keep their numbers relatively small, at least until power creep takes over (see: Pokemon TCG). This is because players do the math themselves. Baldur's Gate, which mostly follows 5th Edition Dungeons and Dragons (DnD) mechanics, caps out at level 20. This is because DnD was originally played on paper and pencil and thus the game's number scale follows suit.
+tk pokemon card image
+_Many card and board games keep their numbers relatively small, at least until power creep takes over (see: Pokemon TCG)._
+
+Numbers are kept "small" because players do the math themselves. Baldur's Gate, which mostly follows 5th Edition Dungeons and Dragons (DnD) mechanics, caps out at level 20. The numbers of a standard polyhedral dice set don't go over 99. This is because DnD was originally played on paper and pencil and thus the game's number scale follows suit.
 
 #### Big numbers for expressing game progression, PvE games
 
@@ -260,7 +269,9 @@ An earlier section of this post discussed the reason for choosing big or small n
 
 ## Summary
 
-- Start by figuring out what you want your user to do and how long that loop of gameplay should take to finish.
+- Start by figuring out what you want your user to do and how long that loop of gameplay should take to finish. 
+  - Define a win condition.
+  - Define the steps (and choices) the user needs to make to win.
 - Think of a core loop's length in terms of moves, whether turns or seconds.
 - When setting stats, start with small numbers (30-50) when prototyping.
 - Normalize your values.
