@@ -1,5 +1,5 @@
 ---
-title: Fundamental stat setting and normalization in games
+title: Basic stat setting and normalization in games
 date: 2025-10-13
 slug: 2025-10-13-devblog
 featured: true
@@ -11,9 +11,6 @@ import square from '/src/assets/dv002-square.jpg'
 import triace from '/src/assets/dv002-triace.jpg'
 
 import { Image } from 'astro:assets';
-
-<Image src={cessna} alt='By Olga Ernst - Own work, CC BY-SA 4.0' />
-_The environment of a game is largely controlled by invisible sliders, dials, and levers._
 
 How do we game designers know what values to use for our video games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
 
@@ -30,7 +27,7 @@ One method to figure out values for stats, is to prototype an atom of gameplay, 
 
 Another method is to **work backwards**, or to begin with the end in mind. I've done this in professional environments where a period of experimentation, about 3 months for a vertical slice of a midcore mobile game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. You're not just doing a core loop prototype. With this method, the team is usually able to figure out the costing for the game and the amount of content based on results during this vertical slice and experimentation phase.
 
-### Short detour on working backwards
+### A short note on working backwards
 
 Knowing the **amount** of content absolutely matters for stat adjustment — if you know your team can only make 60 unique creature designs in time for public beta, and you have an evolution mechanism, that works out to 30 monsters (each monster needs a unique "child" and "adult" design) thus the leveling formula has to account for that.
 
@@ -40,11 +37,11 @@ However, this method is not within this blog post's scope; today we'll be focusi
 
 ## The basics of working forward
 
-The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set based on your self-reflection and experience.
+The **prototype's playtime** (a core loop and maybe 2-3 other loops) and **your production time** are the two values you have to set and refine based on your self-reflection and experience.
 
-You may want to start conservatively until you have the experience to confidently say you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
+You may want to start conservatively until you have the experience to assert that you can make a 15-minute demo. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves.
 
-1. Figure out your core loop. You can do this by identifying repeating building blocks of gameplay. Your core loop will be among these, but there will be many other important loops.
+1. Figure out your core loop. You can do this by identifying **repeating blocks of gameplay**. Your core loop will be among these, but there will be many other important loops.
 1. Write the sequence of the core loop. What steps will the user do?
 1. Compute the number of moves it takes to finish the core loop. Moves can either be **turn-based** or **time-based**. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
     - An example of a time-based move is a basic slash of a Paladin from Warcraft. You can expect a Paladin to slash every N seconds.
@@ -69,18 +66,18 @@ For the purposes of this blog post, let's take a look at a typical battle. The *
 - Hit points
 - Attack or damage points
 
-### Controlling the size of a battle
+### Controlling the size of a gameplay loop
 
 Here are two hopefully uncontroversial statements:
 
-- All other things being equal, a large map in StarCraft where the players are situated at opposite ends, will take longer to finish than a smaller map.
-- All other things being equal, A 3vs3 Pokemon battle will be shorter than a full 6vs6.
+- All other things being equal, a large Starcraft map where the players are situated at opposite ends will take longer to finish than a smaller map.
+- All other things being equal, A 6-vs-6 Pokemon battle will take longer than a 3-vs-3.
 
-Let's say we want an RPG player-versus-player game to be about 3-5 minutes long.
+Let's say we want an RPG player-versus-player game to be about **3-5 minutes** long.
 
-> The average completion of a core loop such as an RPG battle can be measured in the **average number of moves or turns** made to complete the loop.
+> The average completion of a core loop such as an RPG battle can be measured in the **number of moves or turns** made to complete the loop.
 
-Let's say that player A and player B use similar characters: 
+Let's say that Player A and Player B use similar characters: 
 
 | Character lineup | Atk | HP |
 | -------          | ------ | ------ |
@@ -94,21 +91,22 @@ Let's say that player A and player B use similar characters:
 **Total Atk**: 26
 
 (tk add a bar here showing how miniscule 26 is against 385)
+_26 is what percent of 385?_
 
 Dividing the **total HP** by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
 
-It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players. So at a minimum, 30 turns.
+It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players, each taking turns hitting each other. So at a minimum, 29 turns.
 
 Now we wanted our battle to last 3-5 minutes, or 180-300 seconds. Let's work backwards from those values:
 
 ```
-180 seconds / 30 turns = 6 seconds per turn
-300 seconds / 30 turns = 10 seconds per turn
+180 seconds / 29 turns = 6.21 seconds per turn
+300 seconds / 29 turns = 10.34 seconds per turn
 ```
 
 6-10 seconds per turn is too little time to decide on the actions of 4 characters, so it's obvious that these numbers are unrealistic. The game will definitely drag on to more than 5 minutes, especially once we add other options aside from Attack.
 
-It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's create a limit of 6 turns by reducing the HP.
+It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's **set a limit of 6 turns** by reducing the HP.
 
 Let's get the total HP to end a party in 6 turns: 
 
@@ -134,15 +132,17 @@ For now let's apply it evenly across the board:
 |  Daniel          | 7    | 33  |
 
 
-Just from reading those numbers and their variance between characters you can already see the tension much more clearly — and we haven't even touched on other actions, such as Magic, or events such as Miss and Critical.
+Just from reading those numbers and their variance between characters you can already see that there's more tension — and we haven't even touched on other actions, such as Magic, or events such as Miss and Critical.
 
-### Using "big" or "small" numbers
+## Using "big" or "small" numbers
 
 What meaning do numbers have if a game's core loop is measured in moves? The choice of big (`9,999`, `99,999`) or small (`99`) numbers boils down to utility and emotion.
 
 
 tk ffviii 
-To keep  battle relevant (or less of a total slaughter), enemies scale to the same level as the protagonists in FFVIII regardless of territory.
+_In many RPGs, the HP of monsters is set. This means that when the player returns to their beginning town after 10 hours of gameplay, the monsters are easily slaughtered. To keep battle relevant, enemies scale to the same level as the protagonists in FFVIII regardless of location._
+
+### 
 
 A chessboard has 64 squares, or 2^6. If we increase the chessboard size to 128, or 2^7, we know instinctively that we should scale the movement of knights, pawns, and kings.
 
@@ -158,24 +158,35 @@ tk the answer is obviously no
 
 Let's take a look at the case for small numbers.
 
-#### Small numbers for PVP
+#### Small numbers for PVP and prototyping
 
-Card and board games keep their numbers relatively small, at least until power creep takes over (see: Pokemon TCG). This is because players do the math themselves.
+Many card and board games keep their numbers relatively small, at least until power creep takes over (see: Pokemon TCG). This is because players do the math themselves. Baldur's Gate, which mostly follows 5th Edition Dungeons and Dragons (DnD) mechanics, caps out at level 20. This is because DnD was originally played on paper and pencil and thus the game's number scale follows suit.
 
-#### Big numbers for expressing game progression
+#### Big numbers for expressing game progression, PvE games
+
+Big numbers tug at our emotions. They give users a sense of progression. After all, the hours you spend on a game only go up, so your stats should too. You start with 50 HP and ten hours in it's hit 7,000. That gives you a sense of accomplishment.
+
+Mind you, game designers have the option to lessen the amount of experience points doled out; some RPGs require that you only have 100 EXP to level up for each level. But where's the fun in that?
+
+
+tk - IMAGE
+The Iseria Queen from Valkyrie Profile is the last boss of the game and has... 2,300,000 HP.
 
 ## Our last big subject for today: normalization
 
 Normalization in game design ensures that stats (health, speed, power, et cetera) are balanced and meaningful across the board.
 
-## A strategy game example
+### A strategy game example
 
 Let's look at the ingredients of a turn-based strategy game.
 
+[tk - IMAGE]
 Fire Emblem UI
 
+[tk - IMAGE]
 Advance Wars 2 UI
 
+[tk - IMAGE]
 Stratego
 
 Based off of these images, we can identify the following components:
@@ -199,8 +210,8 @@ Here's one possible configuration:
 | Unit type | Rivers  | Plains | Paved roads |
 | --------  | ------ | ---------- | ---------- |
 | Infantry     | 0   | +1 tile    | +2 tiles |
-| Cavalry      | 0   | +2 tiles   | +4 tiles |
-| Supply wagon | 0   | +0          | +2 tiles |
+| Cavalry      | -1 tile   | +2 tiles   | +4 tiles |
+| Supply wagon | -2 tiles   | 0          | +2 tiles |
 
 Here's another one:
 
@@ -212,9 +223,10 @@ Here's another one:
 
 You can come up with justifications for these values, but ultimately the important thing is that the differentiations are meaningful to the user, just as in our earlier example of RPG battle. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units? What is "slightly slower" versus "too slow"? 
 
-> **Instinctively, we know that differentiation requires a floor and ceiling**.
+> **Instinctively, we know that differentiation requires a floor and ceiling, a 0% to 100%**.
+> **Differentiation is all about how the pie is sliced**.
 
-If the greatest possible value is 9 tiles, then instinctively we can _feel_ that "spacing" unit buffs or debuffs by 3 (3, 6, 9) might be meaningful, but if we change the highest value to 50, then assigning values such as 3, 6, 9 is obviously going to muddle the units.
+If the greatest possible value is 9 tiles, then instinctively we can _feel_ that "spacing" unit buffs or debuffs by 3 (3, 6, 9) might be meaningful , but if we change the highest value to 50, then assigning values such as 3, 6, 9 is obviously going to muddle the units.
 
 tk It's all about percentages
 
@@ -222,7 +234,7 @@ Before we move on to _how to choose_ values, however, let's go over a more pract
 
 How do you scale up those numbers to create 30 unit types, or even 100 unit types without someone messing up by typing in an extra 0, or accidentally omitting the `-` sign?
 
-## Applying basic normalization
+### Applying basic normalization
 
 Here's another way of viewing bonuses and penalties:
 
@@ -236,7 +248,7 @@ Here's another way of viewing bonuses and penalties:
 | Terrible | -5 |
 | Worst | -7 |
 
-By setting these variables or constants in one place, such as a constants file, you can reuse the values anywhere. Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table is basic normalization in game design.
+By setting these variables or constants in one place, such as a constants file or sheet, you can reuse the values anywhere. (In Excel, this is achieved through LOOKUP functions). Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table is basic normalization in game design.
 
 (For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
 
@@ -248,4 +260,7 @@ An earlier section of this post discussed the reason for choosing big or small n
 
 ## Summary
 
-- For turn based games, compute the length of a core loop by the number of moves or turns needed to finish the loop. The values themselves are **emotional**!
+- Start by figuring out what you want your user to do and how long that loop of gameplay should take to finish.
+- Think of a core loop's length in terms of moves, whether turns or seconds.
+- When setting stats, start with small numbers (30-50) when prototyping.
+- Normalize your values.
