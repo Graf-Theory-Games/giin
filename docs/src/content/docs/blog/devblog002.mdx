@@ -24,11 +24,11 @@ import { Image } from 'astro:assets';
 
 How do we game designers know what values to use for our video games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
 
-<Image src={square} alt='' width={256} layout='constrained' />
+<Image src={square} alt='Final Fantasy VIII max stats for Squall' width={256} layout='constrained' />
 
 _Square games in the 90s and early 2000s capped out at **255** for each whole number stat and **9999** for HP._
 
-<Image src={triace} alt='' />
+<Image src={triace} alt='Valkyrie Profile stat window' />
 _tri-Ace games in the 90s and early 2000s capped out... wherever the hell they wanted to._
 
 ## Working forwards or backwards
@@ -50,9 +50,9 @@ Today however we'll be focusing on the "working forward" approach, which is more
 
 ## The basics of working forward
 
-Do you know much time it takes for you to make one minute of gameplay? Have you ever tried to time yourself when creating your game content?
+Do you know much time it takes for you to **make** one minute of gameplay? Have you ever tried to time yourself when creating your game content?
 
-<Image src={playtime} alt='' width={480} />
+<Image src={playtime} alt='Meme showing the time it takes to make the game content as opposed to its playtime' width={480} />
 
 You may want to start conservatively (3 to 5 minute game demo) until you build confidence in your experience. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves—less than a minute.
 
@@ -83,7 +83,7 @@ For the purposes of this blog post, let's take a look at a typical battle loop. 
 - Hit points
 - Attack or damage points
 
-<Image src={party} alt='' layout='constrained' />
+<Image src={party} alt='Suikoden 2 battle, 6v6' layout='constrained' />
 _3-vs-3, 4-vs-4, and 6-vs-6 party sizes have to be set up in such a way that battle isn't tedious._
 
 ### Controlling the size of a gameplay loop
@@ -112,7 +112,7 @@ Let's say that Player A and Player B use similar characters:
 
 **Total Atk**: 26
 
-<Image src={part} alt='' />
+<Image src={part} alt='Bar showing how little total attack is opposed to total HP' />
 _You can already see where this is going..._
 
 Dividing the **total HP** by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
@@ -130,7 +130,7 @@ Now we wanted our battle to last 3-5 minutes, or 180-300 seconds. Let's work bac
 
 It's evident that the HP is too high or the Atk is too low. Now that we know how to compute for the number of turns, let's **set a limit of 5 turns per player** by reducing the HP.
 
-Let's get the total HP to end a party in 6 turns: 
+Let's get the total HP to end a party in 5 turns: 
 
 ```
 (Total Atk) * (Ideal number of turns) = (New Total HP)
@@ -142,10 +142,10 @@ Let's get the total HP to end a party in 6 turns:
 ```
 
 
-<Image src={part2} alt='' />
+<Image src={part2} alt='Improved ratio of attack to HP' />
 _Now it only takes us... 9 turns to finish a fight._
 
-That comes to a 63.75HP reduction per character.
+That comes to a **63.75HP** reduction per character.
 
 For now let's apply it evenly across the board, rounding down:
 
@@ -162,7 +162,7 @@ Just from reading those numbers and their variance between characters you can al
 
 What meaning do numbers have if a game's core loop is measured in percentages? The choice of big (`9,999`, `99,999`) or small (`99`) numbers boils down to utility and emotion.
 
-<Image src={ff8} alt='' />
+<Image src={ff8} alt='Final Fantasy VIII battle screen' />
 _To keep battle relevant, enemies scale to the same level as the protagonists in FFVIII regardless of location._
 
 ### Bigger isn't always meaningful  
@@ -176,13 +176,13 @@ Some things to ponder:
 
 In other words, would scaling up be meaningful?
 
-<Image src={no} alt='' width={256} layout='constrained' />
+<Image src={no} alt='Meme saying no' width={256} layout='constrained' />
 
 Let's take a look at the case for small numbers.
 
 #### Small numbers for PVP and prototyping
 
-<Image src={phyrexian} alt='' width={256} layout='constrained' />
+<Image src={phyrexian} alt='Phyrexian Dreadnought card from Magic the Gathering' width={256} layout='constrained' />
 _Many card and board games keep their numbers relatively small._
 
 Numbers are kept "small" because players do the math themselves. Baldur's Gate, which mostly follows 5th Edition Dungeons and Dragons (DnD) mechanics, caps out at level 20. The numbers of a standard polyhedral dice set don't go over 99. This is because DnD was originally played on paper and pencil and thus the game's number scale follows suit.
@@ -194,8 +194,8 @@ Big numbers tug at our emotions. They give users a sense of progression. After a
 Mind you, game designers have the option to lessen the amount of experience points doled out; some RPGs require that you only have 100 EXP to level up for each level. But where's the fun in that?
 
 
-<Image src={iseria} alt='' />
-_The Iseria Queen from Valkyrie Profile is the last secret optional boss of the game and has... 2,300,000 HP._
+<Image src={iseria} alt='Iseria Queen from Valkyrie Profile' />
+_The Iseria Queen from Valkyrie Profile is the last secret optional boss of the game and has... **2,300,000 HP**._
 
 ## Our last topic for today: normalization
 
@@ -205,11 +205,11 @@ Normalization in game design ensures that stats (health, speed, power, etc.) are
 
 Let's look at the ingredients of a turn-based strategy game.
 
-<Image src={stones} alt='' />
-_tk add description Fire Emblem: The Sacred Stones_
+<Image src={stones} alt='Fire Emblem: The Sacred Stones battle screen showing movement range' />
+_**Fire Emblem: The Sacred Stones** shows possible movement range in blue and attack range in red._
 
-<Image src={wars} alt='' />
-_tk add description Advance Wars 2 UI_
+<Image src={wars} alt='Advance Wars battle screen showing movement range' />
+_In **Advance Wars**, tanks can't occupy mountains and their movement is reduced by 1 tile on plains._
 
 Based off of these images, we can identify the following components:
 
@@ -219,31 +219,33 @@ Based off of these images, we can identify the following components:
 
 So let's set up some stats for a strategy game with two systems, **unit types** and **terrain**:
 
-| Unit types   | Terrain |
-| -------      | ------- |
-| Infantry     | Rivers 🏞️ |
-| Cavalry      | Plains 🌾 |
-| Supply wagon | Paved roads 🛣️ |
+| Unit types      | Terrain        |
+| -------         | -------        |
+| Infantry 🤺     | Rivers 🏞️      |
+| Cavalry 🐎      | Plains 🌾      |
+| Supply wagon 🐂 | Paved roads 🛣️ |
 
 In this hypothetical game, one of your tasks as a designer is to decide on movement bonuses or penalties.
 
 Here's one possible configuration:
 
-| Unit type | Rivers  | Plains | Paved roads 🛣️ |
-| --------  | ------ | ---------- | ---------- |
-| Infantry     | 0   | +1 tile    | +2 tiles |
-| Cavalry      | -1 tile   | +2 tiles   | +4 tiles |
-| Supply wagon | -2 tiles   | 0          | +2 tiles |
+| Unit type      | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
+| --------       | ------    | ---------- | ----------     |
+| Infantry 🤺    | 0         | +1 tile    | +2 tiles       |
+| Cavalry 🐎     | -1 tile   | +2 tiles   | +4 tiles       |
+| Supply wagon 🐂| -2 tiles  | 0          | +2 tiles       |
 
 Here's another one:
 
-| Unit type | Rivers  | Plains | Paved roads |
-| --------  | ------ | ---------- | ---------- |
-| Infantry     | -1 tiles | 0         | +3 tiles |
-| Cavalry      | -3 tiles | +3 tiles | +6 tiles |
-| Supply wagon | -6 tiles | -3 tiles | +3 tiles  |
+| Unit type       | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
+| --------        | ------    | ---------- | ----------     |
+| Infantry 🤺     | -1 tiles  | 0          | +3 tiles       |
+| Cavalry 🐎      | -3 tiles  | +3 tiles   | +5 tiles       |
+| Supply wagon 🐂 | -6 tiles  | -3 tiles   | +3 tiles       |
 
-You can come up with justifications for these values, but ultimately the important thing is that the differentiations are **meaningful** to the user, just as in our earlier example of RPG battle. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units? 
+You can come up with justifications for these values, but ultimately the important thing is that the differentiations are **meaningful** to the user, just as in our earlier example of RPG battle. If the Supply Wagon is meant to be slow, is it enough to make it slightly slower than Infantry units?
+
+Another problem that pops up when creating stats for many units is the uniqueness of the values. In our second configuration, we have **Infantry** with a `-1` value and **Cavalry** with a `+5` buff, whereas the other units use `6` and `3`. We know at the back of our mind that we shouldn't have "too many unique values" so we need to standardize or normalize this in some way.
 
 > **Instinctively, we know that differentiation also requires a floor and ceiling, a 0% to 100%**.
 
@@ -253,15 +255,14 @@ In the case of strategy games with movement, we can gain a sense of "playtime" t
 
 If the average unit movement value is 5 tiles, and the board is 15x15 tiles, then we can _feel_ that "spacing" unit buffs or debuffs by 1 (+1, +2, +3) might be meaningful, but if we change the board to 30x30, then assigning such low values is going to muddle the units; they'll all be roughly similar in movement.
 
-<Image src={diff} alt='' />
-tk add captions for the boards
-_Cyan can move 5 tiles, and yellow can move up to 8, overlapping both pink (7) and purple (6) on the 15x15 board. A smaller board size means a greater percentage of movement per tile, which is lost if values are represented as whole numbers and aren't scaled through percentages or some other formula._
+<Image src={diff} alt='Different colored tiles to represent different max movement ranges' />
+_Cyan represents a 5-tile movement range. Yellow covers 8 tiles, overlapping both pink (7) and purple (6) on the 15x15 board. On a larger board, they all appear to move similarly. A smaller board size means a greater percentage of movement per tile, which is lost if values are represented as whole numbers and aren't scaled through percentages or some other formula._
 
 As we observed with the attack values, seeing those values as **percentages** of the total HP helped create more tension. In this example, the superiority or inferiority of one unit over another can be maintained by expressing the movement values as percentages against the **average board size**. To the user, they'll be whole numbers. In a spreadsheet, you can create formulas.
 
-For our example, let's assume an average board size of **23x23**.
+For our example, let's assume an average board size of **23x23**. Let's also define the **scale levels** so that we don't have too many unique numbers for our stats, as we saw with Cavalry and Infantry earlier.
 
-| Scale name | Formula | Value given board size of 23 |
+| Scale level | Formula | Value given board size of 23 |
 | -------  | ------ | ------ |
 | Best | +15% of average board size  | 4 |
 | Great   | +9% of average board size  | 2 |
@@ -271,23 +272,32 @@ For our example, let's assume an average board size of **23x23**.
 | Terrible | -9% of average board size  | -2 |
 | Worst | -15% of average board size  | -4 |
 
-This table both normalizes the values by defining the level of (dis)advantages possible in the game, as well as the scaled movement buffs and debuffs.
+This table both normalizes the values by defining the level of (dis)advantages possible in the game, as well as the scaled movement buffs and debuffs. Let's apply it in the next section.
 
 ### Basic normalization
 
-tk - fix this section
+Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we've defined only a certain subset of numbers.
 
-There is another, more pragmatic problem: how do you scale up those numbers to create 30 unit types, or even 100 unit types without someone messing up by typing in an extra 0, or accidentally omitting the `-` sign in the case of debuffs?
+| Unit type       | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
+| --------        | ------    | ---------- | ----------     |
+| Infantry 🤺     | Bad  | Neutral         | Great       |
+| Cavalry 🐎      | Terrible  | Great   | Best       |
+| Supply wagon 🐂 | Worst  | Bad   | Great       |
 
-By setting these variables or constants in one place, such as a constants file or sheet, you can reuse the values anywhere. Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table is basic normalization in game design.
+You'll notice that **Good** didn't appear. One of the side effects of normalization is the ease by which variety or a lack thereof can be easier to see.
+
+- Perhaps other units, such as **Artillery** or a **Vanguard** might provide movement variety.
+- Perhaps **Cavalry** units are fleet, but actually terrible at dealing damage. 
+
+Normalization also reduces the chances of making simple typing errors when you have 100+ units.
+
+You can set these variables or constants in one place, such as a constants file or sheet, and reuse the values anywhere. Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table with scale levels is basic normalization in game design.
 
 (For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
 
 Additionally, if you need to rebalance the "Good" value, you only need to edit its definition in one file. Let's say that given 3 factions, each faction has 5 units that make use of a "small" buff, i.e. the "Good"-level buff. That's 15 units that can be instantly rebalanced by changing only one value.
 
 ## Summary
-
-tk make this section nicer
 
 - Start by figuring out what you want your user to do and how long that loop of gameplay should take to finish. 
   - Define a win or progression condition.
@@ -298,5 +308,5 @@ tk make this section nicer
 
 ## Image credits
 
-- Let's Play Archive
-- TCGPlayer
+- [Let's Play Archive](https://lparchive.org/)
+- [TCGPlayer](https://www.tcgplayer.com/)
