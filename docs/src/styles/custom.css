@@ -97,3 +97,28 @@ iframe {
   height: 480px;
   width: -webkit-fill-available;
 }
+
+
+thead > tr {
+  background: var(--sl-color-gray-5);
+}
+
+.sl-markdown-content th:not(:where(.not-content *)) {
+  color: var(--sl-color-gray-3);
+}
+
+tbody > tr:nth-child(odd){
+  background: var(--sl-color-gray-7);
+}
+
+.sl-markdown-content :is(th:first-child, td:first-child):not(:where(.not-content *)) {
+  padding-inline-start: 0.8rem;
+}
+.sl-markdown-content :is(th:last-child, td:last-child):not(:where(.not-content *)) {
+  padding-inline-end: 0.8rem;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+}
