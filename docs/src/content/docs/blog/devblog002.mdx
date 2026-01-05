@@ -19,10 +19,11 @@ import iseria from '/src/assets/dv002-iseria.png'
 import stones from '/src/assets/dv002-sacredstones.png'
 import diff from '/src/assets/dv002-diff.jpg'
 import wars from '/src/assets/dv002-advancewars.png'
+import test from '/src/assets/memes/test-it-out.jpg'
 
 import { Image } from 'astro:assets';
 
-How do we game designers know what values to use for our video games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
+How do we game designers set values for our games? Some games cap at level 99; others cap at level 20. Some games have 6 primary stats; other games have 8 or 10.
 
 <Image src={square} alt='Final Fantasy VIII max stats for Squall' width={256} layout='constrained' />
 
@@ -31,9 +32,19 @@ _Square games in the 90s and early 2000s capped out at **255** for each whole nu
 <Image src={triace} alt='Valkyrie Profile stat window' />
 _tri-Ace games in the 90s and early 2000s capped out... wherever the hell they wanted to._
 
-## Working forwards or backwards
+## You will redo your stats
 
-One method to figure out values for stats is to prototype a core loop of gameplay, **working forward**. You'd start prototyping the this loop, and possibly 2-3 other loops, giving yourself a deadline measured in weeks, not months. Those weeks are spent assembling a prototype with placeholder art and animation cues. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+A game goes through innumerable changes and improvements during its development. Your tooling and mindset should expect that any stat, asset, or dialog will be reworked many, many times. That being said, that refinement should go in some _direction_. The goal of this post is to give a starting point when dowsing in the desert for that magical number.
+
+Just because you know that the stats are going to be reworked doesn't mean that you can set random stats for your love interest's affection or your protagonist's speed. Early values do matter, because they can help strengthen your case for some mechanic or another. You still want to make these early values make sense.
+
+> Are you working with a producer or manager who thinks that stats should be locked in at the start of a project? Someone who tries to follow a GDD religiously? This is one of the biggest pink flags to spot when working with others. Choose your team carefully!
+
+## Setting your early stats
+
+One method to figure out values for stats is to prototype a core loop of gameplay, **working forward**. You'd start prototyping the this loop, and maybe 2-3 other loops, then you'd feed the numbers you've computed on paper to that prototype. I'd suggest a short deadline, not more than a month; this will force you into the habit of trimming any fat before figuring out the meat of your game. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+
+<Image src={test} alt='Test it out' />
 
 Another method is to **work backwards**, or to begin with the end in mind, i.e. a release window. I've done this with projects where a period of experimentation, about 3 months for a vertical slice of a game, is baked into the costing and is part of a "real" timetable with milestones (deadlines) mapped to distributor and publisher events. **You're not just doing a core loop prototype**. With this method, the team is usually able to figure out the costing for the game and the amount of content based on results during this vertical slice and experimentation phase.
 
@@ -86,7 +97,7 @@ For the purposes of this blog post, let's take a look at a typical battle loop. 
 <Image src={party} alt='Suikoden 2 battle, 6v6' layout='constrained' />
 _3-vs-3, 4-vs-4, and 6-vs-6 party sizes have to be set up in such a way that battle isn't tedious._
 
-### Controlling the size of a gameplay loop
+### Controlling the size of a gameplay loop through percentages
 
 Here are two hopefully uncontroversial statements:
 
@@ -117,7 +128,7 @@ _You can already see where this is going..._
 
 Dividing the **total HP** by the **total Atk** gives us an idea of how many turns you'd have to hit the opposite party.
 
-It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players, each taking turns hitting each other. So at a minimum, **29 turns**.
+It comes out to 14.81, or **15 turns of solid attacking** to knock out 4 characters. There are 2 players, each taking turns hitting each other. So at a minimum, **29 turns** (first character to hit 15 turns knocks out the other, who was on their 14th turn: 15+14=29).
 
 Now we wanted our battle to last 3-5 minutes, or 180-300 seconds. Let's work backwards from those values:
 
@@ -136,25 +147,27 @@ Let's get the total HP to end a party in 5 turns:
 (Total Atk) * (Ideal number of turns) = (New Total HP)
     26      *           5             = 130
 
-
 (Previous Total HP) - (New Total HP) = (Reduction in HP)
         385         -     130           = 255
+
+(Reduction in HP) / (Number of Characters) = (Reduction per character)
+        255         -     4           = 63.75
 ```
 
 
 <Image src={part2} alt='Improved ratio of attack to HP' />
-_Now it only takes us... 9 turns to finish a fight._
+_Now it only takes us 9 turns to finish a fight._
 
 That comes to a **63.75HP** reduction per character.
 
 For now let's apply it evenly across the board, rounding down:
 
-| Character lineup | Atk | HP |
+| Character lineup | Atk | Previous HP → New HP |
 | -------          | ------ | ------ |
-|  Abel            | 5    | 37 |
-|  Benjamin        | 9    | 12  |
-|  Cain            | 5    | 57 |
-|  Daniel          | 7    | 27  |
+|  Abel            | 5    | 100 → **37** |
+|  Benjamin        | 9    | 75 → **12**  |
+|  Cain            | 5    | 120 → **57** |
+|  Daniel          | 7    | 90 → **27**  |
 
 Just from reading those numbers and their variance between characters you can already see that there's more tension (and that Benjamin should probably be rebalanced)—and we haven't even touched on other actions, such as Magic, or events such as Miss and Critical.
 
@@ -201,7 +214,7 @@ _The Iseria Queen from Valkyrie Profile is the last secret optional boss of the 
 
 Normalization in game design ensures that stats (health, speed, power, etc.) are balanced and meaningful across the board.
 
-### Example 2: Thinking in percentages in a strategy game
+### Example 2: Movement in a strategy game
 
 Let's look at the ingredients of a turn-based strategy game.
 
@@ -228,6 +241,10 @@ So let's set up some stats for a strategy game with two systems, **unit types** 
 In this hypothetical game, one of your tasks as a designer is to decide on movement bonuses or penalties.
 
 Here's one possible configuration:
+
+**Base Average unit movement value: ** 5 tiles
+
+Without applying bonuses or penalties, the average unit will move 5 tiles. This number is chosen based on it being small and easy to compute around, but is ultimately chosen somewhat arbitrarily.
 
 | Unit type      | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
 | --------       | ------    | ---------- | ----------     |
@@ -264,10 +281,10 @@ For our example, let's assume an average board size of **23x23**. Let's also def
 
 | Scale level | Formula | Value given board size of 23 |
 | -------  | ------ | ------ |
-| Best | +15% of average board size  | 4 |
-| Great   | +9% of average board size  | 2 |
-| Good    | +5% of average board size  | 1 |
-| Neutral | 0 | 5 |
+| Best | +15% of average board size  | +4 |
+| Great   | +9% of average board size  | +2 |
+| Good    | +5% of average board size  | +1 |
+| Neutral | 0 | 5 (Base movement value)  |
 | Bad | -5% of average board size  | -1 |
 | Terrible | -9% of average board size  | -2 |
 | Worst | -15% of average board size  | -4 |
@@ -276,7 +293,7 @@ This table both normalizes the values by defining the level of (dis)advantages p
 
 ### Basic normalization
 
-Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we've defined only a certain subset of numbers.
+Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we've limited the scope to a subset of numbers. tk define normalization 
 
 | Unit type       | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
 | --------        | ------    | ---------- | ----------     |
@@ -284,7 +301,13 @@ Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we
 | Cavalry 🐎      | Terrible  | Great   | Best       |
 | Supply wagon 🐂 | Worst  | Bad   | Great       |
 
-You'll notice that **Good** didn't appear. One of the side effects of normalization is the ease by which variety or a lack thereof can be easier to see.
+| Unit type       | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
+| --------        | ------    | ---------- | ----------     |
+| Infantry 🤺     | 4 | 5         | 7       |
+| Cavalry 🐎      | 3  | 7   | 9       |
+| Supply wagon 🐂 | 1  | 4   | 7       |
+
+You'll notice that **Good** didn't appear. One of the side effects of normalization is the ease by which variety or a lack thereof can be easier to spot.
 
 - Perhaps other units, such as **Artillery** or a **Vanguard** might provide movement variety.
 - Perhaps **Cavalry** units are fleet, but actually terrible at dealing damage. 
