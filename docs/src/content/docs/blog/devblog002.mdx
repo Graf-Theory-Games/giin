@@ -42,7 +42,9 @@ Just because you know that the stats are going to be reworked doesn't mean that 
 
 ## Setting your early stats
 
-One method to figure out values for stats is to prototype a core loop of gameplay, **working forward**. You'd start prototyping the this loop, and maybe 2-3 other loops, then you'd feed the numbers you've computed on paper to that prototype. I'd suggest a short deadline, not more than a month; this will force you into the habit of trimming any fat before figuring out the meat of your game. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
+One method to figure out values for stats is to prototype a core loop of gameplay, **working forward**. You'd start prototyping the this loop, and maybe 2-3 other loops, then you'd feed the numbers you've computed on paper to that prototype.
+
+I'd suggest a short deadline, not more than a month; this will force you into the habit of trimming any fat before figuring out the meat of your game. In this scenario, you haven't figured out how big the game is going to be, nor how long it will take to get to the end, but you have to start somewhere.
 
 <Image src={test} alt='Test it out' />
 
@@ -67,15 +69,19 @@ Do you know much time it takes for you to **make** one minute of gameplay? Have 
 
 You may want to start conservatively (3 to 5 minute game demo) until you build confidence in your experience. Remember that the tutorials of games can be 3 minutes or less and that a starting Pokemon battle against a Lv. 2 Rattata takes about 4 moves—less than a minute.
 
+Here are some steps to starting out in making a core loop demo or prototype:
+
 1. Figure out your core loop. You can do this by identifying **repeating blocks of gameplay with clear win (progression) conditions**. Your core loop will be among these, but there will be many other important loops.
 1. Write the sequence or flow chart of the core loop. What steps will the user do? What states can they wind up in?
 1. Compute the number of moves it takes to finish the core loop. Moves can either be **turn-based** or **time-based**. With back-of-the-napkin math, you can establish initial values before the prototype is finished, then feed the values to the prototype.
     - An example of a time-based move is a basic slash of a Paladin from Warcraft. You can expect a Paladin to slash every N seconds.
-    - An example of a turn-based move is the Attack option in Suikoden II.
+    - An example of a turn-based move is the Attack option in Suikoden II.(*)
 1. Prototype the core loop. 
 1. Once the prototype has been finished with reasonable placeholder pauses for animation and cueing, test the values.
 
 This blog post mostly explores **step (3)**.
+
+_(*)Turn based moves still have to be converted to time values if you want to compute for your demo's playtime._
 
 ## Example 1: Choosing a role-playing game's core loop
 
