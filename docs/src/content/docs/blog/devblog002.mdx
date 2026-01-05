@@ -299,7 +299,7 @@ This table both normalizes the values by defining the level of (dis)advantages p
 
 ### Basic normalization
 
-Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we've limited the scope to a subset of numbers. tk define normalization 
+Now that we have defined scale levels ("Best", "Terrible", "Good" and so on), we've limited the scope to a subset of numbers. That's the rough idea of **statistical** normalization: ordering numbers on a common scale. 
 
 | Unit type       | Rivers 🏞️ | Plains 🌾  | Paved roads 🛣️ |
 | --------        | ------    | ---------- | ----------     |
@@ -322,7 +322,7 @@ Normalization also reduces the chances of making simple typing errors when you h
 
 You can set these variables or constants in one place, such as a constants file or sheet, and reuse the values anywhere. Now, you've constrained the values to a certain set. This eliminates errors such as typing in `-8` or `-70` instead of `-7`. This process of separating raw values into their own table with scale levels is basic normalization in game design.
 
-(For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) but doesn't necessarily satisfy 1NF by itself).
+(For those with a background in database design, this fulfills the 'no repeating values or groups' requirement of the first normal form (1NF) for **database normalization** but doesn't necessarily satisfy 1NF by itself).
 
 Additionally, if you need to rebalance the "Good" value, you only need to edit its definition in one file. Let's say that given 3 factions, each faction has 5 units that make use of a "small" buff, i.e. the "Good"-level buff. That's 15 units that can be instantly rebalanced by changing only one value.
 
@@ -333,7 +333,7 @@ Additionally, if you need to rebalance the "Good" value, you only need to edit i
   - Define the steps (and choices) the user needs to make to win.
 - Think of a core loop's length in terms of moves, whether turns or seconds.
 - When setting stats, start with small numbers (1-50) when prototyping.
-- Normalize your values.
+- Normalize your values, and for database admins, that doesn't mean having to normalize to 3NF.
 
 ## Image credits
 
