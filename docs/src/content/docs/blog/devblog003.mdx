@@ -7,7 +7,8 @@ featured: true
 
 import start from '/src/assets/dv003-start.jpg';
 import forever from '/src/assets/dv003-forever.jpg';
-
+import groundhog from '/src/assets/dv003-groundhoglife.jpg';
+import dope from '/src/assets/dv003-dopewars.jpg';
 import { Image } from 'astro:assets';
 
 
@@ -24,7 +25,7 @@ _Left to right: Earliest UI (July 1, 2025) to more recent iterations._
 
 The new features include:
 - **Locations and Activities**. These two work together. Location objects can be **Regions** or **Locales**. A **Region** has up to 6 **Locales**. Each **Locale** has up to 4 **Activities**.
-	- The macro or micro-ness of these locations is up to the game; we could have a Region that is just a single mansion, and each wing or room is a locale, or we could have a space station Region with a residential district, commercial district, downtown etc.
+	- The macro or micro-ness of these locations is up to the game; a designer can make a Region that is just a single mansion, and each wing or room is a locale, or they can make a space station Region with a residential district, commercial district, downtown etc.
 - **Modals**. The game now has a generic box that tells the user "this decision or action goes first". The following features make use of a modal:
 	- Story-based events and dialog.
 	- Inventory (display only for now).
@@ -37,7 +38,9 @@ The original direction was to marry incremental mechanics with otome game (datin
 1. The **passive incremental** feature, because it would intersect with dialog (while having a talk with your love interest, does the game continue? Stall?)
 2.  The **autoplay feature**, because like the passive incremental feature, it intersected with too many active mechanics.
 
-Modern incremental games expect those features.  While you can say that incremental games don't have to be idle games, there is significant overlap between the two. If I won't be building them in the near-term, then perhaps I'm not making an incremental game, after all.
+Modern incremental games expect those features. While you can say that incremental games don't have to be idle games, there is significant overlap between the two. If I won't be building them in the near-term, then perhaps I'm not making an incremental game, after all.
+
+This is not to say that I'll never build those features. But I did say early on that the goal of GIIN is to eventually be able to express any menu/text-based mechanic (sounds too lofty, perhaps I should amend it to "**many** menu-/text-based mechanics). So it's more of a "see you later" situation here, while I go attend to other features.
 
 ### Otome goes first
 
@@ -62,32 +65,30 @@ Otome games have stories. Stories have a who, what, when, where, why. Here's how
 
 ## The move away from incremental mechanics
 
-I like A Dark Room a lot. It tells a story whilst putting you in a zen-like trance of clicking. I like the idea of Groundhog day. I also liked [Fairy Tale](https://alaynacole.com/fairy-tale). 
+I like [A Dark Room](https://adarkroom.doublespeakgames.com/) a lot. It tells a story whilst putting you in a zen-like trance of clicking. I like the ideas within [Groundhog Life](). I also liked [Fairy Tale](https://alaynacole.com/fairy-tale). 
 
-tk screenshot of fairy tale
+<Image src={groundhog} alt='Groundhog life UI' />
+_Groundhog Life plays on its own, making the game urgent and compelling. You don't need exceptional graphics to make a good game._
 
 The stories that lend themselves to incremental mechanics are often (not always) survivalist, or some kind of loop, or macro-event focused. They may have characters, but I haven't found one with a lot of dialog between the characters.
 
 Ultimately, I needed a genre that was more forgiving of the dialog and choice-heavy nature of dating sims. But I also needed a model for something that wasn't too heavy, scope-wise.
 
-### New inspirations: from loops to turns
+### New inspirations: from number-goes-up to turn-based loops
 
 Text-based game mechanics were pretty popular in the aughts: Mafia Wars, Kingdom of Loathing (KoL), that sort of thing. My first game engine was built with KoL in mind. These days there's Fallen London or Torn. Before all of that, I spent a few afternoons on the Palm Pilot port of Dope Wars.
 
-tk dope wars
+<Image src={dope} alt='Dope Wars UI showing random events' width={512}/>
+_Random events can occur during and after you move to a neighborhood._
 
 There were two takeaways:
 
 - **Some randomness isn't a bad thing**. But not in most iterations of Dope Wars, where the randomness can be punishing as it does not give the user a way to beat the randomness.
 - You need to provide the user with **a means to strategize their every turn**, now that you're not thinking in loops.
 
-Expressing randomness can be very poor in older games; I found a pretty good solution in Baldur's Gate. I don't think I can do the dice animation, but I can present randomness as skill checks.
+Expressing randomness can be very poor in older games; I found a pretty good solution in **Baldur's Gate III**. I don't think I can do the dice animation, but I can present randomness as some kind of stat check which the user can choose to put in their favor (or not.)
 
-As for turn-based strategizing, I looked to the simple and elegant solution of Citizen Sleeper, in providing a random set of dice. I don't think I'll make the game that dice-dependent, but instead I have turned the mechanic into a draw of cards at the start of every turn. These cards will provide buffs (called `Drives` to the user.)
-
-## Current core gameplay
-
-tk
+As for turn-based strategizing, I looked to the simple and elegant solution of **Citizen Sleeper**, in providing a random set of dice at the start of every turn. I don't think I'll make the game engine that dice-dependent, but instead I have turned the mechanic into a draw of cards which will provide buffs (called `Drives` to the user.)
 
 ## GIIN then, now, forever
 
