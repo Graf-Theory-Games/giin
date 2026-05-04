@@ -9,8 +9,9 @@ import start from '/src/assets/dv003-start.jpg';
 import forever from '/src/assets/dv003-forever.jpg';
 import groundhog from '/src/assets/dv003-groundhoglife.jpg';
 import dope from '/src/assets/dv003-dopewars.jpg';
-import { Image } from 'astro:assets';
+import newui from '/src/assets/dv003-newUI.jpg';
 
+import { Image } from 'astro:assets';
 
 I was supposed to write a blog post in February, but I got so excited with the progress I was making that I said, "I'll write after I finish the Location/Activities system." And then I worked on modals, and then on the inventory system, and then on moving dialog into its own modal, and then May 1, 2026 arrived, as serenely as all the other days before it.
 
@@ -50,7 +51,8 @@ What happens when one of them gets put in jail? What if you have to hide somethi
 
 ### So this bag of new features belongs to what genre?
 
-tk add image of new features
+<Image src={newui} alt='Latest UI showing new features' />
+_Latest UI showing new features._
 
 The new features are trending towards a **text-based RPG game**. Originally, the locations and activities module would have allowed for the mechanics of A Dark Room (an incremental game), but it also served to open up design for RPGs.
 
