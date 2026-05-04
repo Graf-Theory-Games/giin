@@ -1,0 +1,105 @@
+---
+title: "Engine update 02: Loops and turns"
+date: 2026-05-04
+slug: 2025-05-04-devblog
+featured: true
+---
+
+import start from '/src/assets/dv003-start.jpg';
+import forever from '/src/assets/dv003-forever.jpg';
+import groundhog from '/src/assets/dv003-groundhoglife.jpg';
+import dope from '/src/assets/dv003-dopewars.jpg';
+import newui from '/src/assets/dv003-newUI.jpg';
+
+import { Image } from 'astro:assets';
+
+I was supposed to write a blog post in February, but I got so excited with the progress I was making that I said, "I'll write after I finish the Location/Activities system." And then I worked on modals, and then on the inventory system, and then on moving dialog into its own modal, and then May 1, 2026 arrived, as serenely as all the other days before it.
+
+So now I have to tell myself to sit down and write, if only to help my future self remember the things I've done. I make so many architectural decisions every day, and I've probably failed to capture them in some form. Whatever little I can capture, I know I should.
+
+## Where were we?
+
+My last update about the engine was more than 6 months ago. The engine was more of a dialog engine with an affection stat increaser at that point.
+
+<Image src={start} alt='Montage of various UI as features are added' />
+_Left to right: Earliest UI (July 1, 2025) to more recent iterations._
+
+The new features include:
+- **Locations and Activities**. These two work together. Location objects can be **Regions** or **Locales**. A **Region** has up to 6 **Locales**. Each **Locale** has up to 4 **Activities**.
+	- The macro or micro-ness of these locations is up to the game; a designer can make a Region that is just a single mansion, and each wing or room is a locale, or they can make a space station Region with a residential district, commercial district, downtown etc.
+- **Modals**. The game now has a generic box that tells the user "this decision or action goes first". The following features make use of a modal:
+	- Story-based events and dialog.
+	- Inventory (display only for now).
+- **Inventory**. The inventory feature currently doesn't do anything except exist and appear in the game.
+
+## Why I built these features
+
+The original direction was to marry incremental mechanics with otome game (dating sim) mechanics.  While developing the engine, I came to the conclusion that when mixing genres, you still need a primary genre; the secondary genre helps emphasize the mechanics of the first. In the end, I decided that **otome goes first**. That decision deprioritized two features:
+
+1. The **passive incremental** feature, because it would intersect with dialog (while having a talk with your love interest, does the game continue? Stall?)
+2.  The **autoplay feature**, because like the passive incremental feature, it intersected with too many active mechanics.
+
+Modern incremental games expect those features. While you can say that incremental games don't have to be idle games, there is significant overlap between the two. If I won't be building them in the near-term, then perhaps I'm not making an incremental game, after all.
+
+This is not to say that I'll never build those features. But I did say early on that the goal of GIIN is to eventually be able to express any menu/text-based mechanic (sounds too lofty, perhaps I should amend it to "**many** menu-/text-based mechanics). So it's more of a "see you later" situation here, while I go attend to other features.
+
+### Otome goes first
+
+I want to make female-centric romance games where there's more than dialog stat-raising based on choices. I want that the player **does something** with their love interest of choice.
+
+What happens when one of them gets put in jail? What if you have to hide something from your not-quite-boyfriend? How will Boyfie 2 vs Boyfie 1 respond when you successfully pick a lock or beat them in pool?
+
+### So this bag of new features belongs to what genre?
+
+<Image src={newui} alt='Latest UI showing new features' />
+_Latest UI showing new features._
+
+The new features are trending towards a **text-based RPG game**. Originally, the locations and activities module would have allowed for the mechanics of A Dark Room (an incremental game), but it also served to open up design for RPGs.
+
+Otome games have stories. Stories have a who, what, when, where, why. Here's how they map to RPG features:
+
+| Element        | RPG feature                                                                                                                                                                                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Who            | The characters. This maps to NPCs, LIs, the MC. Includes equipment and character customization, if any. GIIN will have some support for customizing stats at the start of the game.                             |
+| What           | The various things the player can do that serve to propel the game and story; this maps to Activities, Quests, Items. I haven't designed any architecture for the Quest, but it's likely to be part of the MVP. |
+| When and Where | The setting of the game and story. This maps to the Locations feature.                                                                                                                                          |
+| Why            | All RPG mechanics contribute to the why. Why click buttons? Because we want to imagine what choices we'd make in this or that scenario.                                                                         |
+
+## The move away from incremental mechanics
+
+I like [A Dark Room](https://adarkroom.doublespeakgames.com/) a lot. It tells a story whilst putting you in a zen-like trance of clicking. I like the ideas within [Groundhog Life](). I also liked [Fairy Tale](https://alaynacole.com/fairy-tale). 
+
+<Image src={groundhog} alt='Groundhog life UI' />
+_Groundhog Life plays on its own, making the game urgent and compelling. You don't need exceptional graphics to make a good game._
+
+The stories that lend themselves to incremental mechanics are often (not always) survivalist, or some kind of loop, or macro-event focused. They may have characters, but I haven't found one with a lot of dialog between the characters.
+
+Ultimately, I needed a genre that was more forgiving of the dialog and choice-heavy nature of dating sims. But I also needed a model for something that wasn't too heavy, scope-wise.
+
+### New inspirations: from number-goes-up to turn-based loops
+
+Text-based game mechanics were pretty popular in the aughts: Mafia Wars, Kingdom of Loathing (KoL), that sort of thing. My first game engine was built with KoL in mind. These days there's Fallen London or Torn. Before all of that, I spent a few afternoons on the Palm Pilot port of Dope Wars.
+
+<Image src={dope} alt='Dope Wars UI showing random events' width={512}/>
+_Random events can occur during and after you move to a neighborhood._
+
+There were two takeaways:
+
+- **Some randomness isn't a bad thing**. But not in most iterations of Dope Wars, where the randomness can be punishing as it does not give the user a way to beat the randomness.
+- You need to provide the user with **a means to strategize their every turn**, now that you're not thinking in loops.
+
+Expressing randomness can be very poor in older games; I found a pretty good solution in **Baldur's Gate III**. I don't think I can do the dice animation, but I can present randomness as some kind of stat check which the user can choose to put in their favor (or not.)
+
+As for turn-based strategizing, I looked to the simple and elegant solution of **Citizen Sleeper**, in providing a random set of dice at the start of every turn. I don't think I'll make the game engine that dice-dependent, but instead I have turned the mechanic into a draw of cards which will provide buffs (called `Drives` to the user.)
+
+## GIIN then, now, forever
+
+<Image src={forever} alt='GIIN forever and a thousand years' />
+_~~RICK AND MORTY~~ GIIN FOREVER AND FOREVER A HUNDRED YEARS._
+
+Whilst working on this engine, I've thought of a few other names for it:
+
+- **GD Engine**, which can stand for Generic Descriptive Engine, or God Damn Engine
+- **Delulu Engine**, because y'gotta be a little delusional to think you can build an engine
+
+In the end though, I'm keeping GIIN. It has a story behind it.
